@@ -1,0 +1,6 @@
+{
+    "projects":[
+        "recipebook-core-webapi",
+        "recipebook-core-test"
+    ]
+}
