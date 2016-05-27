@@ -9,7 +9,8 @@ namespace recipebook_core_webapi.database
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=./recipebook.db");
+            if(!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlite("Filename=./recipebook.db");
         }
     }
 }
