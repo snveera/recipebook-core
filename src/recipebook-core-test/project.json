@@ -12,6 +12,8 @@
       "type": "platform"
     },
     "xunit": "2.1.0-rc2-*",
+    "Microsoft.EntityFrameworkCore": "1.0.0-rc2-final",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.0-rc2-final",
     "recipebook-core-webapi":"*"
   },
 

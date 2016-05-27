@@ -4,6 +4,12 @@ using System.Linq;
 using Xunit;
 using recipebook_core_webapi.Controllers;
 using recipebook_core_webapi.models;
+using recipebook_core_webapi.database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using recipebook_core_webapi.database.models;
 
 namespace recipebook_core_test
 {
@@ -13,7 +19,9 @@ namespace recipebook_core_test
         public void Get_NoArguments_ReturnsAllRecipes()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             // Act
             var result = controller.Get();
@@ -26,7 +34,9 @@ namespace recipebook_core_test
         public void Get_WithIdentifier_ReturnsMatchingRecipes()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             // Act
             var result = controller.Get(1);
@@ -39,7 +49,9 @@ namespace recipebook_core_test
         public void Get_WithInvalidIdentifier_ReturnsNothing()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             // Act
             var result = controller.Get(100);
@@ -52,7 +64,9 @@ namespace recipebook_core_test
         public void Put_WithValidId_UpdatesRecipe()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             var recipe = new RecipeApiModel{Name = "something else"};
             var recipeId = 1;
@@ -69,7 +83,9 @@ namespace recipebook_core_test
         public void Put_WithInValidId_DoesNothing()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             var recipe = new RecipeApiModel{Name = "something else"};
             var recipeId = 100;
@@ -86,7 +102,9 @@ namespace recipebook_core_test
         public void Post_WithBody_AddsRecipe()
         {
             // Arrange
-            var controller = new RecipeController();
+           var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
           
             var recipe = new RecipeApiModel{
                 Name = "my random name",
@@ -108,7 +126,9 @@ namespace recipebook_core_test
         public void Delete_WithValidIdentifier_RemovesRecipe()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             var recipesBefore = controller.Get().ToList();
             
@@ -124,7 +144,9 @@ namespace recipebook_core_test
         public void Delete_WithInvalidIdentifier_DoesNothing()
         {
             // Arrange
-            var controller = new RecipeController();
+            var dbcontext = GetDbContext();
+            SeedTestData(dbcontext);
+            var controller = new RecipeController(dbcontext);
             
             var recipesBefore = controller.Get().ToList();
             
@@ -134,6 +156,31 @@ namespace recipebook_core_test
             // Assert
             var recipesAfter = controller.Get().ToList();
             Assert.Equal(recipesBefore.Count(),recipesAfter.Count());
+        }
+        
+        private RecipebookDbContext GetDbContext()
+        {
+            // Create a fresh service provider, and therefore a fresh 
+            // InMemory database instance.
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+
+            // Create a new options instance telling the context to use an
+            // InMemory database and the new service provider.
+            var builder = new DbContextOptionsBuilder<RecipebookDbContext>();
+            builder.UseInMemoryDatabase()
+                   .UseInternalServiceProvider(serviceProvider);
+                   
+            return new RecipebookDbContext(builder.Options);
+        }
+        
+        private void SeedTestData(RecipebookDbContext dbcontext)
+        {
+            dbcontext.Recipes.Add(new Recipe{Name="one"});
+            dbcontext.Recipes.Add(new Recipe{Name="two"});
+            
+            dbcontext.SaveChanges();
         }
     }
 }

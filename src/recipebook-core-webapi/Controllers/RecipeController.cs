@@ -12,6 +12,7 @@ namespace recipebook_core_webapi.Controllers
     {
         private RecipebookDbContext _dbContext;
         
+        
         public RecipeController(RecipebookDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -72,6 +73,9 @@ namespace recipebook_core_webapi.Controllers
 
         public RecipeApiModel Map(Recipe recipe)
         {
+            if(recipe == null)
+                return null;
+                
             return new RecipeApiModel{
                 RecipeId = recipe.RecipeId,
                 Name = recipe.Name,
@@ -85,6 +89,9 @@ namespace recipebook_core_webapi.Controllers
         
         public Recipe Map(RecipeApiModel recipe)
         {
+            if(recipe == null)
+                return null;
+            
             return new Recipe{
                 RecipeId = recipe.RecipeId,
                 Name = recipe.Name,
