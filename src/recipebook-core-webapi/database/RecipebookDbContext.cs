@@ -17,11 +17,6 @@ namespace recipebook_core_webapi.database
         }
         
         public DbSet<Recipe> Recipes {get;set;}
-        
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if(!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlite("Filename=./recipebook.db");
-        }
+
     }
 }
