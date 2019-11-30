@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using recipebook.core.Models;
 using recipebook.entityframework;
 using System.Collections.Immutable;
@@ -46,15 +44,18 @@ namespace recipebook.core.Repositories
             var item = _dbContext.Recipes.Find(toUpdate.RecipeId);
             if(item == null)
             {
-                Create(toUpdate);
+                var response = Create(toUpdate);
+                return response;
             }
             else
             {
                 UpdateData(toUpdate, item);
                 _dbContext.SaveChanges();
+
+                var response = Map(item);
+                return response;
             }
 
-            return Get(toUpdate.RecipeId);
         }
 
         private static Recipe Map(entityframework.Models.Recipe toMap)
