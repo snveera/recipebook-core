@@ -33,8 +33,9 @@ namespace recipebook.functions.Functions
         [FunctionName("api-recipe-get-byid")]
         public async Task<IActionResult> GetItem(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "recipe/{id}")] HttpRequest req,
-            ILogger log,
-            string id)
+            string id,
+            ILogger log
+            )
         {
             var result = _manager.Get(id);
 
@@ -44,8 +45,7 @@ namespace recipebook.functions.Functions
         [FunctionName("api-recipe-create")]
         public async Task<IActionResult> Create(
            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "recipe")] HttpRequest req,
-           ILogger log,
-           string id)
+           ILogger log)
         {
 
             var data = await req.ReadAsStringAsync();
@@ -59,8 +59,7 @@ namespace recipebook.functions.Functions
         [FunctionName("api-recipe-update")]
         public async Task<IActionResult> Update(
           [HttpTrigger(AuthorizationLevel.Function, "put", Route = "recipe")] HttpRequest req,
-          ILogger log,
-          string id)
+          ILogger log)
         {
 
             var data = await req.ReadAsStringAsync();
