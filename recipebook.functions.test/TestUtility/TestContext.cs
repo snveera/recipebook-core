@@ -9,6 +9,7 @@ using recipebook.functions;
 using recipebook.entityframework;
 using System.Security.Claims;
 using System.Collections.Generic;
+using recipebook.core.Managers;
 using recipebook.functions.Application;
 using recipebook.functions.test.TestUtility.Fakes;
 using recipebook.functions.test.TestUtility.Extensions;
@@ -52,6 +53,8 @@ namespace recipebook.functions.test.TestUtility
         {
             serviceCollection.AddSingleton<TestContext>();
             serviceCollection.ReplaceTransient<IHttpContextAccessor, FakeHttpContextAccessor>();
+            
+            serviceCollection.ReplaceTransient<ILogger<HealthManager>, FakeLogger<HealthManager>>();
 
             serviceCollection.ReplaceTransient(context =>
             {
