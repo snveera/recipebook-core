@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\recipebook.core\recipebook.core.csproj" />
+    <ProjectReference Include="..\recipebook.entityframework\recipebook.entityframework.csproj" />
     <ProjectReference Include="..\recipebook.functions\recipebook.functions.csproj" />
   </ItemGroup>
 
