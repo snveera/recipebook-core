@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using recipebook.core.Models;
 using recipebook.entityframework;
@@ -33,12 +34,20 @@ namespace recipebook.core.Repositories
 
         public Recipe Create(Recipe toCreate)
         {
+            AssignIdentifier(toCreate);
             var dbModel = Map(toCreate);
+            
             _dbContext.Recipes.Add(dbModel);
             _dbContext.SaveChanges();
 
             return Get(toCreate.Id);
         }
+
+        private static void AssignIdentifier(Recipe toCreate)
+        {
+            toCreate.Id = Guid.NewGuid().ToString();
+        }
+
         public Recipe Update(Recipe toUpdate)
         {
             var item = _dbContext.Recipes.Find(toUpdate.Id);
@@ -76,6 +85,7 @@ namespace recipebook.core.Repositories
         {
             return new entityframework.Models.Recipe
             {
+                Id = toMap.Id,
                 Name = toMap.Name,
                 Servings = toMap.Servings,
                 Rating = toMap.Rating,
