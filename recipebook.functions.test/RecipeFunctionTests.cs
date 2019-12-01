@@ -37,7 +37,7 @@ namespace recipebook.functions.test
             var root = TestCompositionRoot.Create();
 
             root.WithRecipe("recipe-one");
-            var recipe2 = root.WithRecipe("recipe-two",
+            var recipe2Id = root.WithRecipe("recipe-two",
                 "something to add",
                 directions:"what to do",
                 servings:1,
@@ -47,7 +47,7 @@ namespace recipebook.functions.test
             var api = root.Get<RecipeFunction>();
 
             // When
-            var result = await api.GetItem(root.GetRequest(), recipe2.Id, root.CoreLogger());
+            var result = await api.GetItem(root.GetRequest(), recipe2Id, root.CoreLogger());
 
             // Then
             var data = result.AssertIsOkResultWithValue<Recipe>();

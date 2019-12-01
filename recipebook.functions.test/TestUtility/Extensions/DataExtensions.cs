@@ -5,7 +5,7 @@ namespace recipebook.functions.test.TestUtility.Extensions
 {
     public static class DataExtensions
     {
-        public static entityframework.Models.Recipe WithRecipe(this TestCompositionRoot root,
+        public static string WithRecipe(this TestCompositionRoot root,
             string name,
             string ingredients = null,
             string directions = null,
@@ -30,7 +30,7 @@ namespace recipebook.functions.test.TestUtility.Extensions
 
             context.SaveChanges();
 
-            return entity;
+            return entity.Id;
         }
     }
 }
