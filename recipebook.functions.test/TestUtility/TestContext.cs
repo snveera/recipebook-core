@@ -9,6 +9,7 @@ using recipebook.functions;
 using recipebook.entityframework;
 using System.Security.Claims;
 using System.Collections.Generic;
+using recipebook.functions.Application;
 using recipebook.functions.test.TestUtility.Fakes;
 using recipebook.functions.test.TestUtility.Extensions;
 using recipebook.functions.Functions;
@@ -31,7 +32,9 @@ namespace recipebook.functions.test.TestUtility
         {
             _inMemoryDatabaseName = databaseName;
 
+            DependencyInjectionConfig.Configure(services);
             RegisterFunctions(services);
+            RegisterFakes(services);
 
             _provider = services.BuildServiceProvider();
         }
@@ -66,7 +69,7 @@ namespace recipebook.functions.test.TestUtility
     }
     public class TestContext
     {
-        public ClaimsPrincipal CurrentPrincipal { get; internal set; }
-        public List<LoggedMessage> LoggedMessages { get; internal set; }
+        public ClaimsPrincipal CurrentPrincipal { get; set; }
+        public List<LoggedMessage> LoggedMessages { get; set; }
     }
 }

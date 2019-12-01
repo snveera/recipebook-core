@@ -18,7 +18,7 @@ namespace recipebook.functions.Application
             builderServices.AddTransient<RecipeRepository>();
 
             builderServices.AddTransient<HealthManager>();
-
+            
             builderServices.AddTransient(c =>
             {
                 var context = c.GetService<IHttpContextAccessor>();

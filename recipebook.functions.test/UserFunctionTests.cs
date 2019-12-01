@@ -4,6 +4,7 @@ using recipebook.functions.test.TestUtility;
 using recipebook.functions.test.TestUtility.Extensions;
 using System;
 using System.Threading.Tasks;
+using recipebook.core.Managers;
 using Xunit;
 
 namespace recipebook.functions.test

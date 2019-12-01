@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\recipebook.core\recipebook.core.csproj" />
-    <ProjectReference Include="..\recipebook.entityframework\recipebook.entityframework.csproj" />
     <ProjectReference Include="..\recipebook.functions\recipebook.functions.csproj" />
   </ItemGroup>
 
