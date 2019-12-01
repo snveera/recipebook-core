@@ -37,11 +37,11 @@ namespace recipebook.core.Repositories
             _dbContext.Recipes.Add(dbModel);
             _dbContext.SaveChanges();
 
-            return Get(toCreate.RecipeId);
+            return Get(toCreate.Id);
         }
         public Recipe Update(Recipe toUpdate)
         {
-            var item = _dbContext.Recipes.Find(toUpdate.RecipeId);
+            var item = _dbContext.Recipes.Find(toUpdate.Id);
             if(item == null)
             {
                 var response = Create(toUpdate);
@@ -62,7 +62,7 @@ namespace recipebook.core.Repositories
         {
             return new Recipe
             {
-                RecipeId = toMap.RecipeId,
+                Id = toMap.Id,
                 Name = toMap.Name,
                 Servings = toMap.Servings,
                 Rating = toMap.Rating,

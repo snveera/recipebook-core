@@ -5,7 +5,7 @@ namespace recipebook.entityframework.Models
 {
     public class Recipe
     {
-        public string RecipeId { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
