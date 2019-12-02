@@ -17,5 +17,7 @@ namespace recipebook.core.Models
         public string Directions { get; set; }
 
         public string Source { get; set; }
+
+        public string Category { get; set; }
     }
 }

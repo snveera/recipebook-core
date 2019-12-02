@@ -19,6 +19,8 @@ namespace recipebook.entityframework.Models
 
         public string Source { get; set; }
 
+        public string Category { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public string CreatedBy { get; set; }

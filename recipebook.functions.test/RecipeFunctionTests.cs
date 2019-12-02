@@ -42,7 +42,8 @@ namespace recipebook.functions.test
                 directions:"what to do",
                 servings:1,
                 source:"the-test",
-                rating:3);
+                rating:3,
+                category:"the-category");
 
             var api = root.Get<RecipeFunction>();
 
@@ -58,6 +59,7 @@ namespace recipebook.functions.test
             Assert.Equal(1, data.Servings);
             Assert.Equal("the-test", data.Source);
             Assert.Equal(3, data.Rating);
+            Assert.Equal("the-category", data.Category);
         }
 
         [Fact]
@@ -74,7 +76,8 @@ namespace recipebook.functions.test
                 Directions = "what to do",
                 Servings = 1,
                 Source = "the-test",
-                Rating= 3
+                Rating= 3,
+                Category = "the-category"
             };
 
             // When
@@ -91,6 +94,7 @@ namespace recipebook.functions.test
             Assert.Equal(1, matchingResult.Servings);
             Assert.Equal("the-test", matchingResult.Source);
             Assert.Equal(3, matchingResult.Rating);
+            Assert.Equal("the-category", matchingResult.Category);
         }
 
         [Fact]
@@ -109,7 +113,8 @@ namespace recipebook.functions.test
                 Directions = "what to do",
                 Servings = 1,
                 Source = "the-test",
-                Rating = 3
+                Rating = 3,
+                Category = "the-category"
             };
 
             // When
@@ -127,6 +132,7 @@ namespace recipebook.functions.test
             Assert.Equal(1, matchingResult.Servings);
             Assert.Equal("the-test", matchingResult.Source);
             Assert.Equal(3, matchingResult.Rating);
+            Assert.Equal("the-category", matchingResult.Category);
         }
     }
 }

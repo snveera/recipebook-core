@@ -77,7 +77,8 @@ namespace recipebook.core.Repositories
                 Rating = toMap.Rating,
                 Ingredients = toMap.Ingredients,
                 Directions = toMap.Directions,
-                Source = toMap.Source
+                Source = toMap.Source,
+                Category = toMap.Category
             };
         }
 
@@ -91,7 +92,8 @@ namespace recipebook.core.Repositories
                 Rating = toMap.Rating,
                 Ingredients = toMap.Ingredients,
                 Directions = toMap.Directions,
-                Source = toMap.Source
+                Source = toMap.Source,
+                Category = toMap.Category
             };
         }
 
@@ -104,7 +106,8 @@ namespace recipebook.core.Repositories
             to.Ingredients = from.Ingredients;
             to.Directions = from.Directions;
             to.Source = from.Source;
-            
+            to.Category = from.Category;
+
         }
     }
 }

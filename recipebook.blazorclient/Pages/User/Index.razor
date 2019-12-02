@@ -1,7 +1,19 @@
 ﻿@page "/user"
+@using recipebook.blazorclient.Application.ViewModels
+@inject UserViewModel ViewModel
 
-<h1>User Details</h1>
+<h1>User Details: @ViewModel.Name</h1>
+
+<table>
+
+</table>
 
 @code {
-    
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.Initialize();
+
+        await base.OnInitializedAsync();
+    }
+
 }

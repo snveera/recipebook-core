@@ -12,6 +12,7 @@ namespace recipebook.functions.test.TestUtility.Extensions
             int? servings = null,
             string source = null,
             int? rating = null,
+            string category = null,
             string id = null)
         {
             var context = root.Get<RecipeBookDbContext>();
@@ -24,7 +25,8 @@ namespace recipebook.functions.test.TestUtility.Extensions
                 Directions = directions,
                 Servings = servings,
                 Source = source,
-                Rating = rating
+                Rating = rating,
+                Category = category
             };
             context.Recipes.Add(entity);
 
