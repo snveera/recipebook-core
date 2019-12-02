@@ -9,7 +9,7 @@
     {
         public string UserApiUrl()
         {
-            return " http://localhost:7071/api/user";
+            return "http://localhost:7071/api/user";
         }
     }
 }

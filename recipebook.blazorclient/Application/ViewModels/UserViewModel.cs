@@ -14,20 +14,21 @@ namespace recipebook.blazorclient.Application.ViewModels
         {
             _userService = userService;
         }
-        public string Name { get; private set; }
 
-        public ICollection<KeyValuePair<string,string>> Claims { get; private set; }
+        public string Name { get; private set; } = "";
+
+        public ICollection<KeyValuePair<string,string>> Claims { get; private set; } = new List<KeyValuePair<string, string>>();
 
         public async Task Initialize()
         {
             var data = await _userService.Get();
             this.Name = data.Name;
-            this.Claims = data?.Claims.Select(Map).ToList();
+            this.Claims = data?.Claims?.Select(Map)?.ToList();
         }
 
         private static KeyValuePair<string, string> Map(UserClaim claimData)
         {
-            return new KeyValuePair<string, string>(claimData.Type, claimData.Value);
+            return new KeyValuePair<string, string>(claimData?.Type, claimData?.Value);
         }
     }
 }
