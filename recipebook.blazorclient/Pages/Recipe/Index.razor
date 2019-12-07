@@ -1,0 +1,34 @@
+﻿@page "/recipe"
+@using recipebook.blazorclient.Application.ViewModels
+@inject RecipeIndexViewModel ViewModel
+
+<h1>Recipes</h1>
+
+<table class="table table-striped table-sm">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewModel.Recipes)
+        {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Rating</td>
+        </tr>
+        }
+       
+    </tbody>
+</table>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ViewModel.Initialize();
+
+        await base.OnInitializedAsync();
+    }
+
+}

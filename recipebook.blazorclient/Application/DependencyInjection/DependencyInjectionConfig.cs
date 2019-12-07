@@ -11,6 +11,10 @@ namespace recipebook.blazorclient.Application.DependencyInjection
             services.AddTransient<UserViewModel>();
             services.AddTransient<IConfigurationService, ConfigurationService>();
             services.AddTransient<UserService>();
+
+            services.AddTransient<RecipeIndexViewModel>();
+            services.AddTransient<CategoryService>();
+            services.AddTransient<RecipeService>();
         }
     }
 }
