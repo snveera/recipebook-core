@@ -14,6 +14,9 @@ namespace recipebook.functions.Application
         {
             builderServices.AddHttpContextAccessor();
 
+            builderServices.AddTransient<CategoryManager>();
+            builderServices.AddTransient<CategoryRepository>();
+
             builderServices.AddTransient<RecipeManager>();
             builderServices.AddTransient<RecipeRepository>();
 

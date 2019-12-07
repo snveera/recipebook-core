@@ -5,6 +5,20 @@ namespace recipebook.functions.test.TestUtility.Extensions
 {
     public static class DataExtensions
     {
+        public static void WithCategory(this TestCompositionRoot root,
+            string name)
+        {
+            var context = root.Get<RecipeBookDbContext>();
+            var category = new entityframework.Models.Category
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = name
+            };
+
+            context.Categories.Add(category);
+            context.SaveChanges();
+        }
+
         public static string WithRecipe(this TestCompositionRoot root,
             string name,
             string ingredients = null,

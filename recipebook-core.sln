@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.161
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.core", "recipebook.core\recipebook.core.csproj", "{718DE40E-C542-47BE-B73C-6421CAB8C898}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.core", "recipebook.core\recipebook.core.csproj", "{718DE40E-C542-47BE-B73C-6421CAB8C898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.functions", "recipebook.functions\recipebook.functions.csproj", "{17F939A4-2847-4A4F-9307-A1F0164D7D8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions", "recipebook.functions\recipebook.functions.csproj", "{17F939A4-2847-4A4F-9307-A1F0164D7D8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.entityframework", "recipebook.entityframework\recipebook.entityframework.csproj", "{2796854E-84AB-46DC-81F7-FD237662A59C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.entityframework", "recipebook.entityframework\recipebook.entityframework.csproj", "{2796854E-84AB-46DC-81F7-FD237662A59C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD2F5606-B2AB-4312-B22F-236130D937AA}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazorclient", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests (Unit)", "Tests (Unit)", "{007E685C-A7C7-464E-888E-BBE39A5955C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.functions.test", "recipebook.functions.test\recipebook.functions.test.csproj", "{A1696CE1-8B69-4214-A3EB-89A702432B69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions.test", "recipebook.functions.test\recipebook.functions.test.csproj", "{A1696CE1-8B69-4214-A3EB-89A702432B69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

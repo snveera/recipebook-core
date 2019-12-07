@@ -47,6 +47,7 @@ namespace recipebook.functions.test.TestUtility
             serviceCollection.AddTransient<HealthFunction>();
             serviceCollection.AddTransient<UserFunction>();
             serviceCollection.AddTransient<RecipeFunction>();
+            serviceCollection.AddTransient<CategoryFunction>();
         }
 
         private void RegisterFakes(IServiceCollection serviceCollection)
