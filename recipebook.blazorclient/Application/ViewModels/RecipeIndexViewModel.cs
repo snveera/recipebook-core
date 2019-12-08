@@ -35,15 +35,19 @@ namespace recipebook.blazorclient.Application.ViewModels
         private async Task LoadCategories()
         {
             var categories = await _categoryService.Get();
-            this.Categories = categories?
-                .Select(c => c.Name)?
+            this.Categories = categories
+                .Select(c => c.Name)
+                .OrderBy(c=>c)
                 .ToList();
         }
 
         private async Task LoadRecipes(string searchTerms = "")
         {
             var data = await _recipeService.Get();
-            var viewModels = data.Select(Map).ToList();
+            var viewModels = data
+                .Select(Map)
+                .OrderBy(r=>r.Name)
+                .ToList();
             this.Recipes = viewModels;
         }
 
