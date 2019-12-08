@@ -15,11 +15,11 @@
         }
         public string CategoryApiUrl()
         {
-            return @"https://recipebook-functions.azurewebsites.net/api/category?code=vSvDxrFqS0WfpGGkpDBo52EoSZUDRzXKLIMpK5l5cO2MIwCA80ZWfg==";
+            return @"https://recipebook-functions.azurewebsites.net/api/category?code=RriNNfSX5qAdZXUDaIuv/8TpDeA9bB6exLDIYqgI84fkJBmn65fmvw==";
         }
         public string RecipeApiUrl()
         {
-            return @"https://recipebook-functions.azurewebsites.net/api/recipe?code=vSvDxrFqS0WfpGGkpDBo52EoSZUDRzXKLIMpK5l5cO2MIwCA80ZWfg==";
+            return @"https://recipebook-functions.azurewebsites.net/api/recipe?code=heKFQ0zlfITfqZpq32kPzbFHCn8VEsrArrKRMsuM1B3b9FV4oqNuWg==";
         }
     }
 }
