@@ -17,5 +17,16 @@ namespace recipebook.core.Managers
         {
             return _repository.Get();
         }
+
+        public Category Create(string name)
+        {
+            var category = new Category
+            {
+                Name = name
+            };
+            _repository.Create(category);
+
+            return category;
+        }
     }
 }

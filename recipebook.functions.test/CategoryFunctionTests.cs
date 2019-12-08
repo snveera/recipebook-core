@@ -31,5 +31,27 @@ namespace recipebook.functions.test
             Assert.Contains("category-one",resultData.Select(r=>r.Name));
             Assert.Contains("category-two",resultData.Select(r=>r.Name));
         }
+
+        [Fact]
+        public async Task Create_NameInput_CreatesCategory()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+
+            var function = root.Get<CategoryFunction>();
+
+            var data = new Category {Name = "one-to-add"};
+            var request = root.PostRequest(data);
+
+            // When
+            var result = await function.Create(request, root.CoreLogger());
+
+            //Then
+            var resultData = result.AssertIsOkResultWithValue<Category>();
+
+            Assert.NotNull(resultData);
+            Assert.Contains("one-to-add", resultData.Name);
+
+        }
     }
 }
