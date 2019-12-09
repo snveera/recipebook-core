@@ -25,7 +25,9 @@ namespace recipebook.functions.Functions
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "recipe")] HttpRequest req,
             ILogger log)
         {
-            var result = _manager.Get();
+            var searchCriteria = req.Query["criteria"];
+            var searchCategory = req.Query["category"];
+            var result = _manager.Search(searchCriteria,searchCategory);
 
             return new OkObjectResult(result);
         }
@@ -37,7 +39,7 @@ namespace recipebook.functions.Functions
             ILogger log
             )
         {
-            var result = _manager.Get(id);
+            var result = _manager.GetById(id);
 
             return new OkObjectResult(result);
         }

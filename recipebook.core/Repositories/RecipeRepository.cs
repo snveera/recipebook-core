@@ -15,9 +15,20 @@ namespace recipebook.core.Repositories
         {
             _dbContext = dbContext;
         }
-        public IReadOnlyCollection<Recipe> Get()
+        public IReadOnlyCollection<Recipe> Get(string criteria, string category)
         {
-            var data = _dbContext.Recipes
+            var query = _dbContext.Recipes.Where(r => r.Id != null);
+
+            if(category != null)
+            {
+                query = query.Where(r => r.Category == category);
+            }
+            if (criteria != null)
+            {
+                query = query.Where(r => r.Name.Contains(criteria) || r.Category.Contains(criteria));
+            }
+
+            var data = query
                 .Select(Map)
                 .ToImmutableList();
 

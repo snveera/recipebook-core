@@ -13,14 +13,17 @@ namespace recipebook.core.Managers
             _repository = repository;
         }
 
-        public IReadOnlyCollection<Recipe> Get()
+        public IReadOnlyCollection<Recipe> Search(string criteria, string category)
         {
-            var data = _repository.Get();
+            var resolvedCriteria = string.IsNullOrWhiteSpace(criteria) ? null : criteria;
+            var resolvedCategory = string.IsNullOrWhiteSpace(category) ? null : category;
+
+            var data = _repository.Get(criteria, category);
 
             return data;
         }
 
-        public Recipe Get(string id)
+        public Recipe GetById(string id)
         {
             var item = _repository.Get(id);
 
