@@ -69,7 +69,8 @@ namespace recipebook.blazorclient.Application.ViewModels
                 Ingredients = toMap.Ingredients,
                 Directions = toMap.Directions,
                 Rating = toMap.Rating,
-                Source = toMap.Source
+                Source = toMap.Source,
+                Url = $"/recipe/{toMap.Id}"
             };
         }
     }
@@ -91,5 +92,7 @@ namespace recipebook.blazorclient.Application.ViewModels
         public string Source { get; set; }
 
         public string Category { get; set; }
+
+        public string Url { get; set; }
     }
 }

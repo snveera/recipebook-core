@@ -31,7 +31,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-category-create")]
         public async Task<IActionResult> Create(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "recipe")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "category")] HttpRequest req,
             ILogger log)
         {
 
