@@ -19,6 +19,13 @@ namespace recipebook.blazorclient.Application.ViewModels
         public List<string> Categories { get; set; } = new List<string>();
         public List<RecipeViewModel> Recipes { get; set; } = new List<RecipeViewModel>();
 
+        public string CategoryStatus { 
+            get
+            {
+                return Categories.Any() ? "" : "disabled";
+            } 
+        }
+
         public string SearchTerms { get; set; } = "";
 
         public async Task Search()
