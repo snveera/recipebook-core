@@ -5,6 +5,7 @@
         string UserApiUrl();
         string CategoryApiUrl();
         string RecipeApiUrl();
+        string RecipeGetByIdApiUrl();
     }
 
     public class ConfigurationService : IConfigurationService
@@ -20,6 +21,10 @@
         public string RecipeApiUrl()
         {
             return @"https://recipebook-functions.azurewebsites.net/api/recipe?code=heKFQ0zlfITfqZpq32kPzbFHCn8VEsrArrKRMsuM1B3b9FV4oqNuWg==";
+        }
+        public string RecipeGetByIdApiUrl()
+        {
+            return @"https://recipebook-functions.azurewebsites.net/api/recipe/{id}?code=YpvVQoKNCmrEzj2U8tXIUU6k4LTdSZyTH6MFaFppnw0nzVsyccHNOw==";
         }
     }
 }

@@ -34,5 +34,14 @@ namespace recipebook.blazorclient.Application.Services
 
             return data;
         }
+
+        public async Task<Recipe> GetById(string id)
+        {
+            var uri = _configurationService.RecipeGetByIdApiUrl().Replace("{id}",id);
+
+            var data = await _httpClient.GetJsonAsync<Recipe>(uri);
+
+            return data;
+        }
     }
 }
