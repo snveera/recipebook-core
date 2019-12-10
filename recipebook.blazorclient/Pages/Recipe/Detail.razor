@@ -1,0 +1,22 @@
+﻿@page "/recipe/{recipeid}"
+@using recipebook.blazorclient.Application.ViewModels
+@inject RecipeDetailViewModel ViewModel
+
+<h1>@ViewModel.Title</h1>
+<div class="row">
+    
+
+</div>
+
+
+@code {
+    [Parameter]
+    public string RecipeId { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ViewModel.Initialize(RecipeId);
+        await base.OnParametersSetAsync();
+    }
+
+}

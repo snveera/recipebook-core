@@ -53,8 +53,11 @@ namespace recipebook.functions.test
             Assert.Equal("recipe-one", data[0].Name);
         }
 
-        [Fact]
-        public async Task GetAll_Criteria_ReturnsRecipesMatchingName()
+        [Theory]
+        [InlineData("two")]
+        [InlineData("TWO")]
+        [InlineData("tWo")]
+        public async Task GetAll_Criteria_ReturnsRecipesMatchingName(string searchCriteria)
         {
             // Given
             var root = TestCompositionRoot.Create();
@@ -65,7 +68,7 @@ namespace recipebook.functions.test
             var api = root.Get<RecipeFunction>();
 
             var request = root.GetRequest()
-                .WithSearchCriteriaParameter("two");
+                .WithSearchCriteriaParameter(searchCriteria);
             // When
             var result = await api.GetAll(request, root.CoreLogger());
 
