@@ -21,6 +21,14 @@ namespace recipebook.blazorclient.Application.Services
         public async Task<ICollection<Recipe>> Get(string criteria, string category)
         {
             var uri = $"{_configurationService.RecipeApiUrl()}";
+            if (!string.IsNullOrWhiteSpace(criteria))
+            {
+                uri += $"&criteria={criteria}";
+            }
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                uri += $"&category={category}";
+            }
 
             var data = await _httpClient.GetJsonAsync<ICollection<Recipe>>(uri);
 
