@@ -60,7 +60,7 @@ namespace recipebook.functions.test
             var root = TestCompositionRoot.Create();
 
             root.WithRecipe("recipe-one", category: "cat-1");
-            root.WithRecipe("recipe-two");
+            root.WithRecipe("recipe-two", category:"cat-2");
 
             var api = root.Get<RecipeFunction>();
 
