@@ -4,6 +4,9 @@ using System.Linq;
 using recipebook.core.Models;
 using recipebook.entityframework;
 using System.Collections.Immutable;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace recipebook.core.Repositories
 {
@@ -17,7 +20,9 @@ namespace recipebook.core.Repositories
         }
         public IReadOnlyCollection<Recipe> Get(string criteria, string category)
         {
-            var query = _dbContext.Recipes.Where(r => r.Id != null);
+            var query = _dbContext.Recipes
+                .AsNoTracking()
+                .Where(r => r.Id != null);
 
             if(category != null)
             {
@@ -25,7 +30,10 @@ namespace recipebook.core.Repositories
             }
             if (criteria != null)
             {
-                query = query.Where(r => r.Name.Contains(criteria) || r.Category.Contains(criteria));
+                query = query
+                    .AsEnumerable() // Force this to run client side since the implementation (currently Cosmos) does not implement the contains
+                    .AsQueryable()
+                    .Where(r => r.Name.Contains(criteria) || r.Category.Contains(criteria));
             }
 
             var data = query
@@ -35,23 +43,24 @@ namespace recipebook.core.Repositories
             return data;
         }
 
-        public Recipe Get(string id)
+        public async Task<Recipe> Get(string id)
         {
-            var item = _dbContext.Recipes.Find(id);
+            var item = await _dbContext.Recipes
+                .FindAsync(id);
             var mappedItem = Map(item);
 
             return mappedItem;
         }
 
-        public Recipe Create(Recipe toCreate)
+        public async Task<Recipe> Create(Recipe toCreate)
         {
             AssignIdentifier(toCreate);
             var dbModel = Map(toCreate);
             
             _dbContext.Recipes.Add(dbModel);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
-            return Get(toCreate.Id);
+            return await Get(toCreate.Id);
         }
 
         private static void AssignIdentifier(Recipe toCreate)
@@ -59,18 +68,18 @@ namespace recipebook.core.Repositories
             toCreate.Id = Guid.NewGuid().ToString();
         }
 
-        public Recipe Update(Recipe toUpdate)
+        public async Task<Recipe> Update(Recipe toUpdate)
         {
             var item = _dbContext.Recipes.Find(toUpdate.Id);
             if(item == null)
             {
                 var response = Create(toUpdate);
-                return response;
+                return await response;
             }
             else
             {
                 UpdateData(toUpdate, item);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
 
                 var response = Map(item);
                 return response;

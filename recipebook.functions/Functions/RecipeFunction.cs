@@ -27,7 +27,7 @@ namespace recipebook.functions.Functions
         {
             var searchCriteria = req.Query["criteria"];
             var searchCategory = req.Query["category"];
-            var result = _manager.Search(searchCriteria,searchCategory);
+            var result = await _manager.Search(searchCriteria,searchCategory);
 
             return new OkObjectResult(result);
         }
@@ -39,7 +39,7 @@ namespace recipebook.functions.Functions
             ILogger log
             )
         {
-            var result = _manager.GetById(id);
+            var result = await _manager.GetById(id);
 
             return new OkObjectResult(result);
         }
@@ -53,7 +53,7 @@ namespace recipebook.functions.Functions
             var data = await req.ReadAsStringAsync();
             var recipeData = JsonConvert.DeserializeObject<Recipe>(data);
 
-            var result = _manager.Create(recipeData);
+            var result = await _manager.Create(recipeData);
 
             return new OkObjectResult(result);
         }
@@ -67,7 +67,7 @@ namespace recipebook.functions.Functions
             var data = await req.ReadAsStringAsync();
             var recipeData = JsonConvert.DeserializeObject<Recipe>(data);
 
-            var result = _manager.Update(recipeData);
+            var result = await _manager.Update(recipeData);
 
             return new OkObjectResult(result);
         }
