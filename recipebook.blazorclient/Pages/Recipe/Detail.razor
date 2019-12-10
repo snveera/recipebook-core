@@ -6,32 +6,19 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h5>Servings</h5>
-        <p>@ViewModel.Servings</p>
-    </div>
-   
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <h5>Ingredients</h5>
-        <p>@ViewModel.Ingredients</p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <h5>Directions</h5>
-        <p>@ViewModel.Directions</p>
+        <dl>
+            <dt>Servings</dt>
+            <dd>@ViewModel.Servings</dd>
+            <dt>Ingredients</dt>
+            <dd>@ViewModel.Ingredients</dd>
+            <dt>Directions</dt>
+            <dd>@ViewModel.Directions</dd>
+            <dt>Source</dt>
+            <dd>@ViewModel.Source</dd>
+        </dl>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <h5>Source</h5>
-        <p>@ViewModel.Source</p>
-    </div>
-</div>
 
     @code {
         [Parameter]
