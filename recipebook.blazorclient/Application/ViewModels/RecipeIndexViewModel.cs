@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using recipebook.blazorclient.Application.Services;
 
@@ -11,12 +13,14 @@ namespace recipebook.blazorclient.Application.ViewModels
         private readonly CategoryService _categoryService;
         private readonly RecipeService _recipeService;
 
+        private bool _isLoadingRecipes = true;
+
         public RecipeIndexViewModel(CategoryService categoryService, RecipeService recipeService)
         {
             _categoryService = categoryService;
             _recipeService = recipeService;
         }
-        public List<string> Categories { get; set; } = new List<string>();
+        public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
         public List<RecipeViewModel> Recipes { get; set; } = new List<RecipeViewModel>();
 
         public string CategoryStatus { 
@@ -26,36 +30,70 @@ namespace recipebook.blazorclient.Application.ViewModels
             } 
         }
 
+        public string RecipeSearchStatus
+        {
+            get
+            {
+                return _isLoadingRecipes ? "disabled" : "";
+            }
+        }
+
         public string SearchTerms { get; set; } = "";
+        public string Category { get; set; } = "";
 
         public async Task Search()
         {
-            await LoadRecipes(this.SearchTerms);
+            await LoadRecipes();
+        }
+        public async Task InitializeParameters(string category)
+        {
+            this.Category = category;
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                await LoadRecipes();
+            }
         }
 
         public async Task Initialize()
         {
             await LoadCategories();
-            await LoadRecipes();
         }
 
         private async Task LoadCategories()
         {
             var categories = await _categoryService.Get();
             this.Categories = categories
-                .Select(c => c.Name)
-                .OrderBy(c=>c)
+                .Select(Map)
+                .OrderBy(c=>c.Name)
                 .ToList();
         }
 
-        private async Task LoadRecipes(string searchTerms = "")
+        private static CategoryViewModel Map(Models.Category toMap)
         {
-            var data = await _recipeService.Get();
-            var viewModels = data
-                .Select(Map)
-                .OrderBy(r=>r.Name)
-                .ToList();
-            this.Recipes = viewModels;
+            return new CategoryViewModel
+            {
+                Name = toMap.Name,
+                Url = $"/category/{toMap.Name}"
+            };
+        }
+
+        private async Task LoadRecipes()
+        {
+            _isLoadingRecipes = true;
+            try
+            {
+                var data = await _recipeService.Get(this.SearchTerms,this.Category);
+                var viewModels = data
+                    .Select(Map)
+                    .OrderBy(r => r.Name)
+                    .ToList();
+                this.Recipes = viewModels;
+            }
+            finally
+            {
+                _isLoadingRecipes = false;
+            }
+
         }
 
         private static RecipeViewModel Map(Models.Recipe toMap)
@@ -73,6 +111,12 @@ namespace recipebook.blazorclient.Application.ViewModels
                 Url = $"/recipe/{toMap.Id}"
             };
         }
+    }
+
+    public class CategoryViewModel
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
     }
 
     public class RecipeViewModel

@@ -1,4 +1,5 @@
 ﻿@page "/recipe"
+@page "/category/{category}"
 @using recipebook.blazorclient.Application.ViewModels
 @inject RecipeIndexViewModel ViewModel
 
@@ -10,9 +11,9 @@
                 Categories
             </button>
             <div class="dropdown-menu">
-                @foreach (var category in ViewModel.Categories)
+                @foreach (var categoryItem in ViewModel.Categories)
                 {
-                    <a class="dropdown-item" href="#">@category</a>
+                    <a class="dropdown-item" href="@categoryItem.Url">@categoryItem.Name</a>
                 }
             </div>
         </div>
@@ -21,11 +22,11 @@
         <div class="input-group mb-3">
             <input type="text" @bind="ViewModel.SearchTerms" class="form-control" placeholder="Search Terms" aria-label="Search Terms" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" id="button-addon2" @onclick="ViewModel.Search">Search</button>
+                <button class="btn btn-primary @ViewModel.RecipeSearchStatus" type="button" id="button-addon2" @onclick="ViewModel.Search">Search</button>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div id="recipeList" class="col-md-12">
@@ -34,15 +35,23 @@
         {
             <a href="@recipe.Url" class="list-group-item list-group-item-action">@recipe.Name</a>
         }
-     </div>
+    </div>
 </div>
 
 
 @code {
+    [Parameter]
+    public string Category { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ViewModel.InitializeParameters(Category);
+        await base.OnParametersSetAsync();
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await ViewModel.Initialize();
-
         await base.OnInitializedAsync();
     }
 

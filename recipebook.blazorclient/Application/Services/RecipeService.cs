@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -17,9 +18,10 @@ namespace recipebook.blazorclient.Application.Services
             _configurationService = configurationService;
         }
 
-        public async Task<ICollection<Recipe>> Get()
+        public async Task<ICollection<Recipe>> Get(string criteria, string category)
         {
             var uri = $"{_configurationService.RecipeApiUrl()}";
+
             var data = await _httpClient.GetJsonAsync<ICollection<Recipe>>(uri);
 
             return data;
