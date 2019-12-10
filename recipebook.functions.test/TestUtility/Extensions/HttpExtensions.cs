@@ -32,5 +32,22 @@ namespace recipebook.functions.test.TestUtility.Extensions
 
             return request;
         }
+
+        public static HttpRequest WithSearchCriteriaParameter(this HttpRequest request, string value)
+        {
+            request.WithQueryStringParameter("criteria", value);
+            return request;
+        }
+        public static HttpRequest WithCategoryParameter(this HttpRequest request, string value)
+        {
+            request.WithQueryStringParameter("category", value);
+            return request;
+        }
+
+        public static HttpRequest WithQueryStringParameter(this HttpRequest request, string name, string value)
+        {
+            request.QueryString = request.QueryString.Add(name, value);
+            return request;
+        }
     }
 }

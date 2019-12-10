@@ -12,7 +12,7 @@ namespace recipebook.functions.test
     public class RecipeFunctionTests
     {
         [Fact]
-        public async Task GetAll_RecipesInDb_ReturnsAll()
+        public async Task GetAll_NoParameters_ReturnsAll()
         {
             // Given
             var root = TestCompositionRoot.Create();
@@ -28,6 +28,77 @@ namespace recipebook.functions.test
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
             Assert.Equal(2,data.Count);
+        }
+
+        [Fact]
+        public async Task GetAll_Category_ReturnsRecipesInCategory()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+
+            root.WithRecipe("recipe-one", category:"cat-1");
+            root.WithRecipe("recipe-two");
+
+            var api = root.Get<RecipeFunction>();
+
+            var request = root.GetRequest()
+                .WithCategoryParameter("cat-1");
+
+            // When
+            var result = await api.GetAll(request, root.CoreLogger());
+
+            // Then
+            var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
+            Assert.Equal(1, data.Count);
+            Assert.Equal("recipe-one", data[0].Name);
+        }
+
+        [Fact]
+        public async Task GetAll_Criteria_ReturnsRecipesMatchingName()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+
+            root.WithRecipe("recipe-one", category: "cat-1");
+            root.WithRecipe("recipe-two");
+
+            var api = root.Get<RecipeFunction>();
+
+            var request = root.GetRequest()
+                .WithSearchCriteriaParameter("two");
+            // When
+            var result = await api.GetAll(request, root.CoreLogger());
+
+            // Then
+            var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
+            Assert.Equal(1, data.Count);
+            Assert.Equal("recipe-two", data[0].Name);
+        }
+
+        [Fact]
+        public async Task GetAll_CriteriaAndCategory_ReturnsRecipesMatchingBoth()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+
+            root.WithRecipe("recipe-one", category: "cat-1");
+            root.WithRecipe("recipe-two", category:"something-else");
+            root.WithRecipe("recipe-three", category: "cat-1");
+
+            var api = root.Get<RecipeFunction>();
+
+            var request = root.GetRequest()
+                .WithSearchCriteriaParameter("recipe")
+                .WithCategoryParameter("cat-1");
+
+            // When
+            var result = await api.GetAll(request, root.CoreLogger());
+
+            // Then
+            var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
+            Assert.Equal(2, data.Count);
+            Assert.Contains("recipe-one", data.Select(r => r.Name));
+            Assert.Contains("recipe-three", data.Select(r => r.Name));
         }
 
         [Fact]
