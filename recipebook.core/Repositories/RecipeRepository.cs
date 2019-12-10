@@ -32,6 +32,7 @@ namespace recipebook.core.Repositories
                 query = query
                     .ToList() // Force this to run client side since the implementation (currently Cosmos) does not implement the contains
                     .AsQueryable()
+                    .Where(r => r.Name != null && r.Category != null)
                     .Where(r => r.Name.Contains(criteria) || r.Category.Contains(criteria));
             }
 
