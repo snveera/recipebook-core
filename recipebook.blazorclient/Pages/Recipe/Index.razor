@@ -33,13 +33,22 @@
     <div class="list-group">
         @foreach (var recipe in ViewModel.Recipes)
         {
-            <a href="@recipe.Url" class="list-group-item list-group-item-action">@recipe.Name</a>
+            <div class="list-group-item list-group-item-action" @onclick="(() => LiveDemo.Show())">@recipe.Name</div>
         }
     </div>
 </div>
+<BSModal @ref="LiveDemo" Size="@Size.ExtraLarge">
+    <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Hide())">Close</BSButton>
+    </BSModalFooter>
+</BSModal>
 
 
 @code {
+    BSModal LiveDemo;
+
     [Parameter]
     public string Category { get; set; }
 
