@@ -16,11 +16,11 @@ namespace recipebook.blazorclient.Application.ViewModels
             _recipeService = recipeService;
         }
 
-        public string Title => _recipe?.Name ?? "Loading...";
+        public string Title => _recipe?.Name?.Trim() ?? "Loading...";
         public string Servings => _recipe?.Servings?.ToString() ?? "";
         public List<string> Ingredients => _recipe?.Ingredients?.ToLineList() ?? new List<string>();
         public List<string> Directions => _recipe?.Directions?.ToLineList() ?? new List<string>();
-        public string Source => _recipe?.Source ?? "";
+        public string Source => _recipe?.Source?.Trim() ?? "";
 
         public async Task Initialize(string recipeId)
         {

@@ -101,13 +101,7 @@ namespace recipebook.blazorclient.Application.ViewModels
             return new RecipeViewModel
             {
                 Id = toMap.Id,
-                Name = toMap.Name,
-                Category = toMap.Category,
-                Servings = toMap.Servings,
-                Ingredients = toMap.Ingredients,
-                Directions = toMap.Directions,
-                Rating = toMap.Rating,
-                Source = toMap.Source,
+                Name = toMap.Name?.Trim(),
                 Url = $"/recipe/{toMap.Id}"
             };
         }
@@ -124,18 +118,6 @@ namespace recipebook.blazorclient.Application.ViewModels
         public string Id { get; set; }
 
         public string Name { get; set; }
-
-        public int? Servings { get; set; }
-
-        public int? Rating { get; set; }
-
-        public string Ingredients { get; set; }
-
-        public string Directions { get; set; }
-
-        public string Source { get; set; }
-
-        public string Category { get; set; }
 
         public string Url { get; set; }
     }

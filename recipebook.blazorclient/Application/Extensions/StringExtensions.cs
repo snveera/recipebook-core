@@ -14,6 +14,7 @@ namespace recipebook.blazorclient.Application.Extensions
             var delimiterResolved = delimiter ?? Environment.NewLine;
             return value
                 .Split(new []{ delimiterResolved },StringSplitOptions.None)
+                .Select(l=>l?.Trim())
                 .ToList();
         }
     }
