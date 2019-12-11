@@ -13,7 +13,7 @@ namespace recipebook.blazorclient.Application.ViewModels
         private readonly CategoryService _categoryService;
         private readonly RecipeService _recipeService;
 
-        private bool _isLoadingRecipes = true;
+        private bool _isLoadingRecipes = false;
 
         public RecipeIndexViewModel(CategoryService categoryService, RecipeService recipeService)
         {
