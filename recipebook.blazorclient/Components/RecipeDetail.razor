@@ -1,0 +1,16 @@
+﻿<BSModal @ref="RecipeModal" Size="@Size.ExtraLarge">
+    <BSModalHeader OnClick="@(() => RecipeModal.Hide())">@Id</BSModalHeader>
+    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Primary" OnClick="@(() => RecipeModal.Hide())">Close</BSButton>
+    </BSModalFooter>
+</BSModal>
+@code {
+    BSModal RecipeModal;
+    string Id;
+    public void Show(string id)
+    {
+        Id = id;
+        RecipeModal.Show();
+    }
+}

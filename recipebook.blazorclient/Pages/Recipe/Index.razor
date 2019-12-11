@@ -1,6 +1,7 @@
 ﻿@page "/recipe"
 @page "/category/{category}"
 @using recipebook.blazorclient.Application.ViewModels
+@using recipebook.blazorclient.Components
 @inject RecipeIndexViewModel ViewModel
 
 <h1 class="display-3">Recipes</h1>
@@ -33,21 +34,15 @@
     <div class="list-group">
         @foreach (var recipe in ViewModel.Recipes)
         {
-            <div class="list-group-item list-group-item-action" @onclick="(() => LiveDemo.Show())">@recipe.Name</div>
+            <div class="list-group-item list-group-item-action" @onclick="(()=>Detail.Show(recipe.Id))">@recipe.Name</div>
         }
     </div>
 </div>
-<BSModal @ref="LiveDemo" Size="@Size.ExtraLarge">
-    <BSModalHeader OnClick="@(() => LiveDemo.Hide())">Modal title</BSModalHeader>
-    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
-    <BSModalFooter>
-        <BSButton Color="Color.Primary" OnClick="@(() => LiveDemo.Hide())">Close</BSButton>
-    </BSModalFooter>
-</BSModal>
-
+<RecipeDetail @ref="Detail"/>
 
 @code {
     BSModal LiveDemo;
+    RecipeDetail Detail;
 
     [Parameter]
     public string Category { get; set; }
