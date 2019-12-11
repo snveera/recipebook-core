@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions.test",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.datatransfer", "recipebook.datatransfer\recipebook.datatransfer.csproj", "{AD1EA128-8EF2-4744-ACFE-779268D810F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.datatransfer.core", "recipebook.datatransfer.core\recipebook.datatransfer.core.csproj", "{AC5974AA-64B8-4839-A03C-4C40AFBE628B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{AD1EA128-8EF2-4744-ACFE-779268D810F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD1EA128-8EF2-4744-ACFE-779268D810F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD1EA128-8EF2-4744-ACFE-779268D810F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
