@@ -21,6 +21,7 @@ namespace recipebook.blazorclient.Application.ViewModels
         public List<string> Ingredients => _recipe?.Ingredients?.ToLineList() ?? new List<string>();
         public List<string> Directions => _recipe?.Directions?.ToLineList() ?? new List<string>();
         public string Source => _recipe?.Source?.Trim() ?? "";
+        public int? Rating => _recipe?.Rating;
 
         public async Task Initialize(string recipeId)
         {
