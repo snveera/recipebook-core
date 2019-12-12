@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-recipebook.blazorserver-0FD27D32-06BD-4044-A1EC-7FE9D30D3AE0</UserSecretsId>
+    <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorStrap" Version="1.0.106" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\recipebook.blazor.core\recipebook.blazor.core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\DependencyInjection\" />
+    <Folder Include="Pages\Recipe\" />
+    <Folder Include="Pages\User\" />
+  </ItemGroup>
+
+</Project>

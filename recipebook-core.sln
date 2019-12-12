@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions.test",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazor.test", "recipebook.blazor.test\recipebook.blazor.test.csproj", "{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.blazor.core", "recipebook.blazor.core\recipebook.blazor.core.csproj", "{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazor.core", "recipebook.blazor.core\recipebook.blazor.core.csproj", "{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.blazorserver", "recipebook.blazorserver\recipebook.blazorserver.csproj", "{AEC5266D-0341-4B38-AEF3-E0E12415444F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
