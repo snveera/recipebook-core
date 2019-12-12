@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-10">
         <div class="input-group mb-3">
-            <input type="text" @bind="ViewModel.SearchTerms" class="form-control" placeholder="Search Terms" aria-label="Search Terms" aria-describedby="button-addon2">
+            <input type="search" @bind="ViewModel.SearchTerms" class="form-control" placeholder="Search Terms" aria-label="Search Terms" aria-describedby="button-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary @ViewModel.RecipeSearchStatus" type="button" id="button-addon2" @onclick="ViewModel.Search">Search</button>
             </div>
