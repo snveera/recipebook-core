@@ -6,7 +6,12 @@ using recipebook.blazorclient.Application.Models;
 
 namespace recipebook.blazorclient.Application.Services
 {
-    public class UserService
+    public interface IUserService
+    {
+        Task<User> Get();
+    }
+
+    public class UserService : IUserService
     {
         private readonly HttpClient _httpClient;
         private readonly IConfigurationService _configurationService;

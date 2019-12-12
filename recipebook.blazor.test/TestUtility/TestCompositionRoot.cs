@@ -37,6 +37,7 @@ namespace recipebook.blazor.test.TestUtility
 
             serviceCollection.ReplaceTransient<IRecipeService, FakeRecipeService>();
             serviceCollection.ReplaceTransient<ICategoryService, FakeCategoryService>();
+            serviceCollection.ReplaceTransient<IUserService, FakeUserService>();
         }
 
         public T Get<T>()
@@ -47,8 +48,8 @@ namespace recipebook.blazor.test.TestUtility
 
     public class TestContext
     {
-        public User CurrentUser { get; set; }
-        public List<Category> CategoriesInApi { get; set; }
-        public List<Recipe> RecipesInApi { get; set; }
+        public User CurrentUser { get; set; } = new User();
+        public List<Category> CategoriesInApi { get; set; } = new List<Category>();
+        public List<Recipe> RecipesInApi { get; set; } = new List<Recipe>();
     }
 }

@@ -8,9 +8,9 @@ namespace recipebook.blazorclient.Application.ViewModels
 {
     public class UserViewModel
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UserViewModel(UserService userService)
+        public UserViewModel(IUserService userService)
         {
             _userService = userService;
         }
