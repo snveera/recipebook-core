@@ -14,10 +14,10 @@ namespace recipebook.blazor.core.Services
 
     public class RecipeService : IRecipeService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClient;
         private readonly IConfigurationService _configurationService;
 
-        public RecipeService(HttpClient httpClient, IConfigurationService configurationService)
+        public RecipeService(IHttpClientFactory httpClient, IConfigurationService configurationService)
         {
             _httpClient = httpClient;
             _configurationService = configurationService;
@@ -35,7 +35,8 @@ namespace recipebook.blazor.core.Services
                 uri += $"&category={category}";
             }
 
-            var data = await _httpClient.GetJsonAsync<ICollection<Recipe>>(uri);
+            var client = _httpClient.CreateClient();
+            var data = await client.GetJsonAsync<ICollection<Recipe>>(uri);
 
             return data;
         }
@@ -44,7 +45,8 @@ namespace recipebook.blazor.core.Services
         {
             var uri = _configurationService.RecipeGetByIdApiUrl().Replace("{id}",id);
 
-            var data = await _httpClient.GetJsonAsync<Recipe>(uri);
+            var client = _httpClient.CreateClient();
+            var data = await client.GetJsonAsync<Recipe>(uri);
 
             return data;
         }

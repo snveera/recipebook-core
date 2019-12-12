@@ -8,7 +8,8 @@ namespace recipebook.blazorclient.Application.DependencyInjection
     {
         public static void Configure(IServiceCollection services)
         {
-            
+            services.AddHttpClient();
+
             services.AddTransient<IConfigurationService, ConfigurationService>();
             services.AddTransient<IUserService,UserService>();
 

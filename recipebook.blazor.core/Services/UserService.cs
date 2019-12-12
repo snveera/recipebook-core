@@ -12,10 +12,10 @@ namespace recipebook.blazor.core.Services
 
     public class UserService : IUserService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClient;
         private readonly IConfigurationService _configurationService;
 
-        public UserService(HttpClient httpClient, IConfigurationService configurationService)
+        public UserService(IHttpClientFactory httpClient, IConfigurationService configurationService)
         {
             _httpClient = httpClient;
             _configurationService = configurationService;
@@ -24,7 +24,9 @@ namespace recipebook.blazor.core.Services
         public async Task<User> Get()
         {
             var uri = $"{_configurationService.UserApiUrl()}";
-            var userData = await _httpClient.GetJsonAsync<User>(uri);
+
+            var client = _httpClient.CreateClient();
+            var userData = await client.GetJsonAsync<User>(uri);
 
             return userData;
         }

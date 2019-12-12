@@ -43,7 +43,7 @@ namespace recipebook.blazorserver
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
+            
             DependencyInjectionConfig.Configure(services);
         }
 

@@ -13,10 +13,10 @@ namespace recipebook.blazor.core.Services
 
     public class CategoryService : ICategoryService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClient;
         private readonly IConfigurationService _configurationService;
 
-        public CategoryService(HttpClient httpClient, IConfigurationService configurationService)
+        public CategoryService(IHttpClientFactory httpClient, IConfigurationService configurationService)
         {
             _httpClient = httpClient;
             _configurationService = configurationService;
@@ -25,7 +25,8 @@ namespace recipebook.blazor.core.Services
         public async Task<ICollection<Category>> Get()
         {
             var uri = $"{_configurationService.CategoryApiUrl()}";
-            var data = await _httpClient.GetJsonAsync<ICollection<Category>>(uri);
+            var client = _httpClient.CreateClient();
+            var data = await client.GetJsonAsync<ICollection<Category>>(uri);
 
             return data;
         }
