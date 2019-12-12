@@ -1,6 +1,6 @@
 ﻿@page "/recipe"
 @page "/category/{category}"
-@using recipebook.blazorclient.Application.ViewModels
+@using recipebook.blazor.core.ViewModels
 @inject RecipeIndexViewModel ViewModel
 
 <h1 class="display-3">Recipes</h1>
@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-10">
         <div class="input-group mb-3">
-            <input type="text" @bind="ViewModel.SearchTerms" class="form-control" placeholder="Search Terms" aria-label="Search Terms" aria-describedby="button-addon2">
+            <input type="search" @bind="ViewModel.SearchTerms" class="form-control" placeholder="Search Terms" aria-label="Search Terms" aria-describedby="button-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary @ViewModel.RecipeSearchStatus" type="button" id="button-addon2" @onclick="ViewModel.Search">Search</button>
             </div>
@@ -33,13 +33,16 @@
     <div class="list-group">
         @foreach (var recipe in ViewModel.Recipes)
         {
-            <a href="@recipe.Url" class="list-group-item list-group-item-action">@recipe.Name</a>
+            <div class="list-group-item list-group-item-action" @onclick="(async ()=> await Detail.Show(recipe.Id))">@recipe.Name</div>
         }
     </div>
 </div>
-
+<RecipeModal @ref="Detail"/>
 
 @code {
+    BSModal LiveDemo;
+    RecipeModal Detail;
+
     [Parameter]
     public string Category { get; set; }
 

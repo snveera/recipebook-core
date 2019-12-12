@@ -1,47 +1,24 @@
 ﻿@page "/recipe/{recipeid}"
-@using recipebook.blazorclient.Application.ViewModels
+@using recipebook.blazor.core.ViewModels
 @inject RecipeDetailViewModel ViewModel
 
 <h1 class="display-4">@ViewModel.Title</h1>
 
-<div class="row">
-    <div class="col-md-12">
-        <dl>
-            <dt>Servings</dt>
-            <dd>@ViewModel.Servings</dd>
-            <dt>Ingredients</dt>
-            <dd>
-                <ul style="list-style-type:none;">
-                    @foreach (var item in ViewModel.Ingredients)
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </dd>
-            <dt>Directions</dt>
-            <dd>
-                <ul style="list-style-type:none;">
-                    @foreach (var item in ViewModel.Directions)
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </dd>
-            <dt>Source</dt>
-            <dd>@ViewModel.Source</dd>
-        </dl>
-    </div>
-</div>
+<RecipeDetail Rating="@ViewModel.Rating"
+              Servings="@ViewModel.Servings"
+              Ingredients="@ViewModel.Ingredients"
+              Directions="@ViewModel.Directions"
+              Source="@ViewModel.Source"></RecipeDetail>
 
 
-    @code {
-        [Parameter]
-        public string RecipeId { get; set; }
+@code {
+    [Parameter]
+    public string RecipeId { get; set; }
 
-        protected override async Task OnParametersSetAsync()
-        {
-            await ViewModel.Initialize(RecipeId);
-            await base.OnParametersSetAsync();
-        }
-
+    protected override async Task OnParametersSetAsync()
+    {
+        await ViewModel.Initialize(RecipeId);
+        await base.OnParametersSetAsync();
     }
+
+}
