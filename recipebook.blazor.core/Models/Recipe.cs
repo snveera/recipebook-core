@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace recipebook.blazorclient.Application.Models
+﻿namespace recipebook.blazor.core.Models
 {
     public class Recipe
     {

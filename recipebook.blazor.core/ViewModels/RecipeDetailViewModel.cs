@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using recipebook.blazorclient.Application.Extensions;
-using recipebook.blazorclient.Application.Models;
-using recipebook.blazorclient.Application.Services;
+using recipebook.blazor.core.Extensions;
+using recipebook.blazor.core.Models;
+using recipebook.blazor.core.Services;
 
-namespace recipebook.blazorclient.Application.ViewModels
+namespace recipebook.blazor.core.ViewModels
 {
     public class RecipeDetailViewModel
     {

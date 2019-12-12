@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using recipebook.blazor.core.ViewModels;
 using recipebook.blazor.test.TestUtility;
 using recipebook.blazor.test.TestUtility.Extensions;
-using recipebook.blazorclient.Application.ViewModels;
 using Xunit;
 
 namespace recipebook.blazor.test.ViewModels

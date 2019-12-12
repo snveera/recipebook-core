@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using recipebook.blazorclient.Application.Models;
-using recipebook.blazorclient.Application.Services;
+using recipebook.blazor.core.Models;
+using recipebook.blazor.core.Services;
 
 namespace recipebook.blazor.test.TestUtility.Fakes
 {

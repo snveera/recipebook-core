@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using recipebook.blazorclient.Application.Services;
+using recipebook.blazor.core.Models;
+using recipebook.blazor.core.Services;
 
-namespace recipebook.blazorclient.Application.ViewModels
+namespace recipebook.blazor.core.ViewModels
 {
     public class RecipeIndexViewModel
     {
@@ -68,7 +66,7 @@ namespace recipebook.blazorclient.Application.ViewModels
                 .ToList();
         }
 
-        private static CategoryViewModel Map(Models.Category toMap)
+        private static CategoryViewModel Map(Category toMap)
         {
             return new CategoryViewModel
             {
@@ -96,7 +94,7 @@ namespace recipebook.blazorclient.Application.ViewModels
 
         }
 
-        private static RecipeViewModel Map(Models.Recipe toMap)
+        private static RecipeViewModel Map(Recipe toMap)
         {
             return new RecipeViewModel
             {

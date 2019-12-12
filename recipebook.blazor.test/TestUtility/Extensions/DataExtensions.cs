@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using recipebook.blazorclient.Application.Models;
+using recipebook.blazor.core.Models;
 
 namespace recipebook.blazor.test.TestUtility.Extensions
 {

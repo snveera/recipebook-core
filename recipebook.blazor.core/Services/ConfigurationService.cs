@@ -1,4 +1,4 @@
-﻿namespace recipebook.blazorclient.Application.Services
+﻿namespace recipebook.blazor.core.Services
 {
     public interface IConfigurationService
     {

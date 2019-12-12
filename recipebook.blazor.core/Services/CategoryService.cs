@@ -2,9 +2,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using recipebook.blazorclient.Application.Models;
+using recipebook.blazor.core.Models;
 
-namespace recipebook.blazorclient.Application.Services
+namespace recipebook.blazor.core.Services
 {
     public interface ICategoryService
     {

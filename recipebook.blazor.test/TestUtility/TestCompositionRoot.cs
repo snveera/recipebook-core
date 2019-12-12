@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.Extensions.DependencyInjection;
+using recipebook.blazor.core.Models;
+using recipebook.blazor.core.Services;
 using recipebook.blazor.test.TestUtility.Extensions;
 using recipebook.blazor.test.TestUtility.Fakes;
 using recipebook.blazorclient.Application.DependencyInjection;
-using recipebook.blazorclient.Application.Models;
-using recipebook.blazorclient.Application.Services;
 
 namespace recipebook.blazor.test.TestUtility
 {

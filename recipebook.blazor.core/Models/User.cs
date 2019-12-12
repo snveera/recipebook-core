@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace recipebook.blazorclient.Application.Models
+namespace recipebook.blazor.core.Models
 {
     public class User
     {

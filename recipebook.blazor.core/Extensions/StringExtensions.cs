@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace recipebook.blazorclient.Application.Extensions
+namespace recipebook.blazor.core.Extensions
 {
     public static class StringExtensions
     {

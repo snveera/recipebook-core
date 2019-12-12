@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using recipebook.blazorclient.Application.Services;
-using recipebook.blazorclient.Application.ViewModels;
+using recipebook.blazor.core.Services;
+using recipebook.blazor.core.ViewModels;
 
 namespace recipebook.blazorclient.Application.DependencyInjection
 {
