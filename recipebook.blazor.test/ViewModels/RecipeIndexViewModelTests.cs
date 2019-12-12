@@ -34,7 +34,7 @@ namespace recipebook.blazor.test.ViewModels
         }
 
         [Fact]
-        public async Task Initialize_NoParameters_GetsCategories()
+        public async Task Initialize_NoParameters_ShowsCategories()
         {
             // Given
             var root = TestCompositionRoot.Create();
@@ -60,7 +60,7 @@ namespace recipebook.blazor.test.ViewModels
         }
 
         [Fact]
-        public async Task InitializeParameters_WithCategory_GetsRecipes()
+        public async Task InitializeParameters_WithCategory_ShowsRecipes()
         {
             // Given
             var root = TestCompositionRoot.Create();
@@ -85,7 +85,7 @@ namespace recipebook.blazor.test.ViewModels
         }
 
         [Fact]
-        public async Task Search_SearchText_GetsRecipes()
+        public async Task Search_SearchText_ShowsRecipes()
         {
             // Given
             var root = TestCompositionRoot.Create();

@@ -31,7 +31,7 @@ namespace recipebook.blazorclient.Application.ViewModels
 
         private async Task LoadRecipe(string recipeId)
         {
-            this._recipe = await _recipeService.GetById(recipeId);
+            this._recipe = await _recipeService.GetById(recipeId) ?? new Recipe {Id = recipeId,Name="Not Found"};
         }
     }
 }

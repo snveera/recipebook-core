@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using recipebook.blazorclient.Application.Models;
@@ -22,9 +23,25 @@ namespace recipebook.blazor.test.TestUtility.Extensions
             root.Context.CategoriesInApi.Add(new Category {Name = name});
         }
 
-        public static void WithRecipe(this TestCompositionRoot root, string name)
+        public static void WithRecipe(this TestCompositionRoot root, 
+            string name, 
+            string id = null,
+            int? rating = null,
+            int? servings = null,
+            string source = null,
+            string ingredients = null,
+            string directions = null)
         {
-            root.Context.RecipesInApi.Add(new Recipe { Name = name });
+            root.Context.RecipesInApi.Add(new Recipe
+            {
+                Name = name, 
+                Id = id ?? Guid.NewGuid().ToString(),
+                Rating = rating,
+                Servings = servings,
+                Source = source,
+                Ingredients = ingredients,
+                Directions = directions
+            });
         }
     }
 
