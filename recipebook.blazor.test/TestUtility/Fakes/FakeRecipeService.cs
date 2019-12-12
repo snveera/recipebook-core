@@ -16,12 +16,16 @@ namespace recipebook.blazor.test.TestUtility.Fakes
         }
         public async Task<ICollection<Recipe>> Get(string criteria, string category)
         {
+            _context.RecipeCriteriaSentToApi = criteria;
+            _context.RecipeCategorySentToApi = category;
             return _context.RecipesInApi;
         }
 
         public async Task<Recipe> GetById(string id)
         {
+            _context.RecipeId = id;
             return _context.RecipesInApi.FirstOrDefault(r => r.Id == id);
         }
+
     }
 }

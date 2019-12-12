@@ -51,5 +51,8 @@ namespace recipebook.blazor.test.TestUtility
         public User CurrentUser { get; set; } = new User();
         public List<Category> CategoriesInApi { get; set; } = new List<Category>();
         public List<Recipe> RecipesInApi { get; set; } = new List<Recipe>();
+        public string RecipeId { get; set; }
+        public string RecipeCategorySentToApi { get; set; }
+        public string RecipeCriteriaSentToApi { get; set; }
     }
 }
