@@ -7,7 +7,13 @@ using recipebook.blazorclient.Application.Models;
 
 namespace recipebook.blazorclient.Application.Services
 {
-    public class RecipeService
+    public interface IRecipeService
+    {
+        Task<ICollection<Recipe>> Get(string criteria, string category);
+        Task<Recipe> GetById(string id);
+    }
+
+    public class RecipeService : IRecipeService
     {
         private readonly HttpClient _httpClient;
         private readonly IConfigurationService _configurationService;
@@ -44,4 +50,5 @@ namespace recipebook.blazorclient.Application.Services
             return data;
         }
     }
+
 }

@@ -18,7 +18,7 @@ namespace recipebook.blazorclient.Application.DependencyInjection
             services.AddTransient<CategoryService>();
             services.AddSingleton<ICategoryService, CachedCategoryService>();
             
-            services.AddTransient<RecipeService>();
+            services.AddTransient<IRecipeService,RecipeService>();
         }
     }
 }

@@ -8,10 +8,10 @@ namespace recipebook.blazorclient.Application.ViewModels
 {
     public class RecipeDetailViewModel
     {
-        private readonly RecipeService _recipeService;
+        private readonly IRecipeService _recipeService;
         private Recipe _recipe;
 
-        public RecipeDetailViewModel(RecipeService recipeService)
+        public RecipeDetailViewModel(IRecipeService recipeService)
         {
             _recipeService = recipeService;
         }
