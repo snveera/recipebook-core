@@ -16,6 +16,7 @@ namespace recipebook.blazorclient.Application.ViewModels
             _recipeService = recipeService;
         }
 
+        public string Id => _recipe?.Id;
         public string Title => _recipe?.Name?.Trim() ?? "Loading...";
         public string Servings => _recipe?.Servings?.ToString() ?? "";
         public List<string> Ingredients => _recipe?.Ingredients?.ToLineList() ?? new List<string>();

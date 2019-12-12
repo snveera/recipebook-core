@@ -1,7 +1,6 @@
 ﻿@page "/recipe"
 @page "/category/{category}"
 @using recipebook.blazorclient.Application.ViewModels
-@using recipebook.blazorclient.Components
 @inject RecipeIndexViewModel ViewModel
 
 <h1 class="display-3">Recipes</h1>
@@ -34,15 +33,15 @@
     <div class="list-group">
         @foreach (var recipe in ViewModel.Recipes)
         {
-            <div class="list-group-item list-group-item-action" @onclick="(()=>Detail.Show(recipe.Id))">@recipe.Name</div>
+            <div class="list-group-item list-group-item-action" @onclick="(async ()=> await Detail.Show(recipe.Id))">@recipe.Name</div>
         }
     </div>
 </div>
-<RecipeDetail @ref="Detail"/>
+<RecipeModal @ref="Detail"/>
 
 @code {
     BSModal LiveDemo;
-    RecipeDetail Detail;
+    RecipeModal Detail;
 
     [Parameter]
     public string Category { get; set; }

@@ -1,16 +1,54 @@
-﻿<BSModal @ref="RecipeModal" Size="@Size.ExtraLarge">
-    <BSModalHeader OnClick="@(() => RecipeModal.Hide())">@Id</BSModalHeader>
-    <BSModalBody><p>Modal body text goes here.</p></BSModalBody>
-    <BSModalFooter>
-        <BSButton Color="Color.Primary" OnClick="@(() => RecipeModal.Hide())">Close</BSButton>
-    </BSModalFooter>
-</BSModal>
+﻿<div class="row">
+    <div class="col-md-12">
+        <dl>
+            @if (Rating.HasValue)
+            {
+                <dt>Rating</dt>
+                <dd>
+                    @for (var item = 0; item < Rating; item++)
+                    {
+                        <span class="oi oi-star"></span>
+                    }
+                </dd>
+            }
+            @if (!string.IsNullOrWhiteSpace(Servings))
+            {
+                <dt>Servings</dt>
+                <dd>@Servings</dd>
+
+                <dt>Ingredients</dt>
+                <dd>
+                    <ul style="list-style-type: none;">
+                        @foreach (var item in Ingredients)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </dd>
+            }
+            <dt>Directions</dt>
+            <dd>
+                <ul style="list-style-type:none;">
+                    @foreach (var item in Directions)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </dd>
+
+            @if (!string.IsNullOrWhiteSpace(Source))
+            {
+                <dt>Source</dt>
+                <dd>@Source</dd>
+            }
+        </dl>
+    </div>
+</div>
 @code {
-    BSModal RecipeModal;
-    string Id;
-    public void Show(string id)
-    {
-        Id = id;
-        RecipeModal.Show();
-    }
+    [Parameter] public int? Rating { get; set; }
+    [Parameter] public string Servings { get; set; }
+    [Parameter] public ICollection<string> Ingredients { get; set; }
+    [Parameter] public ICollection<string> Directions { get; set; }
+    [Parameter] public string Source { get; set; }
+
 }
