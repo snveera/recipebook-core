@@ -2,7 +2,9 @@
 @inject RecipeDetailViewModel ViewModel
 
 <BSModal @ref="ModalDialog" Size="@Size.ExtraLarge">
-    <BSModalHeader OnClick="@(() => ModalDialog.Hide())"><h4 class="display-4">@ViewModel.Title</h4></BSModalHeader>
+    <BSModalHeader OnClick="@(() => ModalDialog.Hide())">
+        <h4 class="display-4">@ViewModel.Title</h4>
+    </BSModalHeader>
     <BSModalBody>
         <RecipeDetail Rating="@ViewModel.Rating"
                       Servings="@ViewModel.Servings"
@@ -13,7 +15,8 @@
         
     </BSModalBody>
     <BSModalFooter>
-        <a href="/recipe/@ViewModel.Id" class="btn btn-secondary" target="_blank" >View Full Page</a>
+        <button class="btn btn-outline-info mr-auto" type="button"><span class="oi oi-pencil"></span></button>
+        <a href="/recipe/@ViewModel.Id" class="btn btn-secondary" target="_blank">View Full Page</a>
         <BSButton Color="Color.Primary" OnClick="@(() => ModalDialog.Hide())">Close</BSButton>
     </BSModalFooter>
 </BSModal>
