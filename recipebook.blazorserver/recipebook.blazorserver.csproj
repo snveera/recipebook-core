@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Application\DependencyInjection\" />
-    <Folder Include="Pages\Recipe\" />
     <Folder Include="Pages\User\" />
   </ItemGroup>
 

@@ -1,0 +1,58 @@
+﻿@page "/recipe/edit/{recipeid}"
+@using recipebook.blazor.core.ViewModels
+@using recipebook.blazorserver.Components
+@inject RecipeEditViewModel ViewModel
+
+<h1 class="display-4">Edit: @ViewModel.Name</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" class="form-control" id="nameInput" placeholder="Name" @bind="@ViewModel.Name">
+        </div>
+        <div class="form-group">
+            <label for="servingsInput">Servings</label>
+            <input type="number" class="form-control" id="servingsInput" placeholder="Servings" @bind="@ViewModel.Servings">
+        </div>
+        <div class="form-group">
+            <label for="ratingsInput">Servings</label>
+            <input type="number" class="form-control" id="ratingsInput" placeholder="Rating" @bind="@ViewModel.Rating">
+        </div>
+        <div class="form-group">
+            <label for="ingredientsInput">Ingredients</label>
+            <textarea @bind="@ViewModel.Ingredients" class="form-control" id="ingredientsInput" placeholder="Ingredients" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="directionsInput">Directions</label>
+            <textarea @bind="@ViewModel.Directions" class="form-control" id="directionsInput" placeholder="Directions" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="sourceInput">Source</label>
+            <input type="text" class="form-control" id="sourceInput" placeholder="Source" @bind="@ViewModel.Source">
+         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="button" class="btn btn-success">Save</button>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+@code {
+    [Parameter]
+    public string RecipeId { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ViewModel.Initialize(RecipeId);
+        await base.OnParametersSetAsync();
+    }
+
+}
