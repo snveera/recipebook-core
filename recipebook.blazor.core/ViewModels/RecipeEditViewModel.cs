@@ -35,6 +35,11 @@ namespace recipebook.blazor.core.ViewModels
             await LoadRecipe(recipeId);
         }
 
+        public async Task Save()
+        {
+
+        }
+
         private async Task LoadCategories()
         {
             var categories = await _categoryService.Get();
