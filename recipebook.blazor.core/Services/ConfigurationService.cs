@@ -31,12 +31,12 @@
 
         public string RecipeCreateApiUrl()
         {
-            throw new System.NotImplementedException();
+            return @"https://recipebook-functions.azurewebsites.net/api/recipe?code=Dm30pncsQLiBL3JirF/bfYJ6QhtMDJmcSvqJQPYdRTGfelI1iVnY8Q==";
         }
 
         public string RecipeUpdateApiUrl()
         {
-            throw new System.NotImplementedException();
+            return @"https://recipebook-functions.azurewebsites.net/api/recipe?code=yZQUXasCUYeejvRwwFqfiVQtIUwXwkdSNUcmfxGOAIircf48b/f9xQ==";
         }
     }
 }

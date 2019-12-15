@@ -90,6 +90,9 @@ namespace recipebook.core.Repositories
 
         private static Recipe Map(entityframework.Models.Recipe toMap)
         {
+            if (toMap == null)
+                return null;
+
             return new Recipe
             {
                 Id = toMap.Id,

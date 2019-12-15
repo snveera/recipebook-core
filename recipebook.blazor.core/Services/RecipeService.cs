@@ -68,7 +68,8 @@ namespace recipebook.blazor.core.Services
             var uri = _configurationService.RecipeUpdateApiUrl();
 
             var client = _httpClient.CreateClient();
-            var data = await client.PostJsonAsync<Recipe>(uri, recipeData);
+            
+            var data = await client.PutJsonAsync<Recipe>(uri, recipeData);
 
             return data;
         }
