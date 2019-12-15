@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\recipebook.blazorclient\recipebook.blazorclient.csproj" />
+    <ProjectReference Include="..\recipebook.blazorserver\recipebook.blazorserver.csproj" />
   </ItemGroup>
 
 </Project>

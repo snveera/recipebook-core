@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
 using recipebook.blazor.core.Models;
 using recipebook.blazor.core.Services;
 using recipebook.blazor.test.TestUtility.Extensions;
 using recipebook.blazor.test.TestUtility.Fakes;
-using recipebook.blazorclient.Application.DependencyInjection;
+using recipebook.blazorserver.Application.DependencyInjection;
 
 namespace recipebook.blazor.test.TestUtility
 {
@@ -38,6 +39,7 @@ namespace recipebook.blazor.test.TestUtility
             serviceCollection.ReplaceTransient<IRecipeService, FakeRecipeService>();
             serviceCollection.ReplaceTransient<ICategoryService, FakeCategoryService>();
             serviceCollection.ReplaceTransient<IUserService, FakeUserService>();
+            serviceCollection.ReplaceTransient<NavigationManager, FakeNavigationManager>();
         }
 
         public T Get<T>()

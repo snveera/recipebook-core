@@ -85,6 +85,7 @@ namespace recipebook.blazor.core.ViewModels
             Ingredients = recipe.Ingredients;
             Directions = recipe.Directions;
             Source = recipe.Source;
+            Rating = recipe.Rating;
         }
         private Recipe MapFromViewModel()
         {
