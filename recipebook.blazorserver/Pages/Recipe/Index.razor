@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
         <div class="input-group mb-3">
             <input type="search" @bind="ViewModel.SearchTerms" class="form-control" placeholder="Search Terms" aria-label="Search Terms" aria-describedby="button-addon2">
             <div class="input-group-append">
@@ -27,17 +27,22 @@
             </div>
         </div>
     </div>
-
-</div>
-
-<div id="recipeList" class="col-md-12">
-    <div class="list-group">
-        @foreach (var recipe in ViewModel.Recipes)
-        {
-            <div class="list-group-item list-group-item-action" @onclick="(async ()=> await Detail.Show(recipe.Id))">@recipe.Name</div>
-        }
+    <div class="col-md-1">
+        <a href="/recipe/create/" class="btn btn-outline-info oi oi-plus" title="Add new recipe"></a>
     </div>
 </div>
+
+<div class="row">
+    <div id="recipeList" class="col-md-12">
+        <div class="list-group">
+            @foreach (var recipe in ViewModel.Recipes)
+            {
+                <div class="list-group-item list-group-item-action" @onclick="(async ()=> await Detail.Show(recipe.Id))">@recipe.Name</div>
+            }
+        </div>
+    </div>
+</div>
+
 <RecipeModal @ref="Detail"/>
 
 @code {
