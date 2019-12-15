@@ -6,6 +6,8 @@
         string CategoryApiUrl();
         string RecipeApiUrl();
         string RecipeGetByIdApiUrl();
+        string RecipeCreateApiUrl();
+        string RecipeUpdateApiUrl();
     }
 
     public class ConfigurationService : IConfigurationService
@@ -25,6 +27,16 @@
         public string RecipeGetByIdApiUrl()
         {
             return @"https://recipebook-functions.azurewebsites.net/api/recipe/{id}?code=YpvVQoKNCmrEzj2U8tXIUU6k4LTdSZyTH6MFaFppnw0nzVsyccHNOw==";
+        }
+
+        public string RecipeCreateApiUrl()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string RecipeUpdateApiUrl()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

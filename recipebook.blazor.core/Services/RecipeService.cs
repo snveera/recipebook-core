@@ -10,6 +10,8 @@ namespace recipebook.blazor.core.Services
     {
         Task<ICollection<Recipe>> Get(string criteria, string category);
         Task<Recipe> GetById(string id);
+        Task<Recipe> Create(Recipe recipeData);
+        Task<Recipe> Update(Recipe recipeData);
     }
 
     public class RecipeService : IRecipeService
@@ -47,6 +49,26 @@ namespace recipebook.blazor.core.Services
 
             var client = _httpClient.CreateClient();
             var data = await client.GetJsonAsync<Recipe>(uri);
+
+            return data;
+        }
+
+        public async Task<Recipe> Create(Recipe recipeData)
+        {
+            var uri = _configurationService.RecipeCreateApiUrl();
+
+            var client = _httpClient.CreateClient();
+            var data = await client.PostJsonAsync<Recipe>(uri,recipeData);
+
+            return data;
+        }
+
+        public async Task<Recipe> Update(Recipe recipeData)
+        {
+            var uri = _configurationService.RecipeUpdateApiUrl();
+
+            var client = _httpClient.CreateClient();
+            var data = await client.PostJsonAsync<Recipe>(uri, recipeData);
 
             return data;
         }
