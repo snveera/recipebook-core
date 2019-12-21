@@ -11,8 +11,8 @@ namespace recipebook.blazorserver.Application
     {
         public static void Configure(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                .AddAzureAD(options => configuration.Bind("AzureAd", options));
+            //services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
+            //    .AddAzureAD(options => configuration.Bind("AzureAd", options));
         }
 
         public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
