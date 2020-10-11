@@ -22,6 +22,12 @@ namespace recipebook.core.Managers
             return user;
         }
 
+        public User Get(ClaimsPrincipal principal)
+        {
+            var user = Map(principal);
+            return user;
+        }
+
         private User Map(ClaimsPrincipal principal)
         {
             var user = new User

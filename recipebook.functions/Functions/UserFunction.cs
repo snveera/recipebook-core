@@ -24,7 +24,7 @@ namespace recipebook.functions.Functions
             ILogger log,
             ClaimsPrincipal user)
         {
-            var result = _manager.GetCurrent();
+            var result = _manager.Get(user);
 
             return new OkObjectResult(result);
         }
