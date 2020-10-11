@@ -30,5 +30,10 @@ namespace recipebook.functions.test.TestUtility.Extensions
 
             root.Context.CurrentPrincipal = new ClaimsPrincipal(claimsIdentity);
         }
+
+        public static ClaimsPrincipal AuthenticatedUser(this TestCompositionRoot root)
+        {
+            return root.Context.CurrentPrincipal;
+        }
     }
 }

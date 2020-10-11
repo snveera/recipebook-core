@@ -19,7 +19,7 @@ namespace recipebook.functions.test
             var api = root.Get<HealthFunction>();
 
             // When
-            var result = await api.Run(root.GetRequest(), root.CoreLogger());
+            var result = await api.Run(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var healthResult = result.AssertIsOkResultWithValue<ApplicationHealth>();

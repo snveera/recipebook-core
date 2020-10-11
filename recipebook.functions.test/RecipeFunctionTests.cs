@@ -23,7 +23,7 @@ namespace recipebook.functions.test
             var api = root.Get<RecipeFunction>();
 
             // When
-            var result = await api.GetAll(root.GetRequest(), root.CoreLogger());
+            var result = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -45,7 +45,7 @@ namespace recipebook.functions.test
                 .WithCategoryParameter("cat-1");
 
             // When
-            var result = await api.GetAll(request, root.CoreLogger());
+            var result = await api.GetAll(request, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -70,7 +70,7 @@ namespace recipebook.functions.test
             var request = root.GetRequest()
                 .WithSearchCriteriaParameter(searchCriteria);
             // When
-            var result = await api.GetAll(request, root.CoreLogger());
+            var result = await api.GetAll(request, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -95,7 +95,7 @@ namespace recipebook.functions.test
                 .WithCategoryParameter("cat-1");
 
             // When
-            var result = await api.GetAll(request, root.CoreLogger());
+            var result = await api.GetAll(request, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -122,7 +122,7 @@ namespace recipebook.functions.test
             var api = root.Get<RecipeFunction>();
 
             // When
-            var result = await api.GetItem(root.GetRequest(), recipe2Id, root.CoreLogger());
+            var result = await api.GetItem(root.GetRequest(), recipe2Id, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<Recipe>();
@@ -155,10 +155,10 @@ namespace recipebook.functions.test
             };
 
             // When
-            var createResult = await api.Create(root.PostRequest(postData), root.CoreLogger());
+            var createResult = await api.Create(root.PostRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
-            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger());
+            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
             var getData = getResult.AssertIsOkResultWithValue<ICollection<Recipe>>();
 
             var matchingResult = getData.SingleOrDefault(r => r.Name == "the-new-item");
@@ -192,10 +192,10 @@ namespace recipebook.functions.test
             };
 
             // When
-            var updateResult = await api.Update(root.PutRequest(postData), root.CoreLogger());
+            var updateResult = await api.Update(root.PutRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
-            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger());
+            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
             var getData = getResult.AssertIsOkResultWithValue<ICollection<Recipe>>();
 
             var matchingResult = getData.SingleOrDefault(r => r.Name == "the-new-item");

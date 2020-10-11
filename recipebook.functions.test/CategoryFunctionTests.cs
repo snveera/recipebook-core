@@ -22,7 +22,7 @@ namespace recipebook.functions.test
             var function = root.Get<CategoryFunction>();
 
             // When
-            var result = await function.Run(root.GetRequest(), root.CoreLogger());
+            var result = await function.Run(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
 
             //Then
             var resultData = result.AssertIsOkResultWithValue<IReadOnlyCollection<Category>>();
@@ -44,7 +44,7 @@ namespace recipebook.functions.test
             var request = root.PostRequest(data);
 
             // When
-            var result = await function.Create(request, root.CoreLogger());
+            var result = await function.Create(request, root.CoreLogger(), root.AuthenticatedUser());
 
             //Then
             var resultData = result.AssertIsOkResultWithValue<Category>();
