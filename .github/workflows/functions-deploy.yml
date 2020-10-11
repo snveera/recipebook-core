@@ -1,0 +1,48 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy recipebook.functions
+
+on:
+  workflow_run:
+    workflows: ["CI Build"]
+    branches: [master]
+    types: 
+      - completed
+
+jobs:
+
+  deploy:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+
+    - name: Restore Nuget Package Dependencies
+      run: dotnet restore recipebook-core.sln
+
+    - name: Build Solution
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run Unit Tests
+      run: dotnet test --no-restore --verbosity normal
+    
+    - name: 'Service Principal Login'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: 'Deploy Azure Function'
+      uses: Azure/functions-action@v1
+      id: fa
+      with:
+        app-name: recipebook-functions
+        package: recipebook.functions/bin/Release/netcoreapp3.1
+
+    - name: logout
+      run: |
+        az logout
