@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore recipebook-core.sln
 
       - name: Build Solution
-        run: dotnet build --configuration Release /p:AssemblyVersion=$GITHUB_RUN_NUMBER /p:FileVersion=$GITHUB_RUN_NUMBER /p:Version=$GITHUB_RUN_NUMBER --no-restore 
+        run: dotnet build --configuration Release /p:AssemblyVersion=${{GITHUB_RUN_NUMBER}} /p:FileVersion=${{GITHUB_RUN_NUMBER}} /p:Version=${{GITHUB_RUN_NUMBER}} --no-restore 
 
       - name: Run Unit Tests
         run: dotnet test --no-restore --verbosity normal
