@@ -1,6 +1,6 @@
 {
-  "name": "recipebook.blazor",
-  "short_name": "recipebook.blazor",
+  "name": "Recipe Book",
+  "short_name": "RecipeBook",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",

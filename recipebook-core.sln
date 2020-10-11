@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests (Unit)", "Tests (Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions.test", "recipebook.functions.test\recipebook.functions.test.csproj", "{A1696CE1-8B69-4214-A3EB-89A702432B69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.blazor", "recipebook.blazor\recipebook.blazor.csproj", "{DB77753C-1F7E-415C-8343-8E4E6896B356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazor", "recipebook.blazor\recipebook.blazor.csproj", "{DB77753C-1F7E-415C-8343-8E4E6896B356}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
