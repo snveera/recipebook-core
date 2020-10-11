@@ -21,7 +21,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-category")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "category")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "category")] HttpRequest req,
             ILogger log)
         {
             var result = _manager.Get();
@@ -31,7 +31,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-category-create")]
         public async Task<IActionResult> Create(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "category")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "category")] HttpRequest req,
             ILogger log)
         {
 

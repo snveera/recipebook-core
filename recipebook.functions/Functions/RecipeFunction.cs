@@ -22,7 +22,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-recipe-get-all")]
         public async Task<IActionResult> GetAll(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "recipe")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "recipe")] HttpRequest req,
             ILogger log)
         {
             var searchCriteria = req.Query["criteria"];
@@ -34,7 +34,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-recipe-get-byid")]
         public async Task<IActionResult> GetItem(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "recipe/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "recipe/{id}")] HttpRequest req,
             string id,
             ILogger log
             )
@@ -46,7 +46,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-recipe-create")]
         public async Task<IActionResult> Create(
-           [HttpTrigger(AuthorizationLevel.Function, "post", Route = "recipe")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "recipe")] HttpRequest req,
            ILogger log)
         {
 
@@ -60,7 +60,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-recipe-update")]
         public async Task<IActionResult> Update(
-          [HttpTrigger(AuthorizationLevel.Function, "put", Route = "recipe")] HttpRequest req,
+          [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "recipe")] HttpRequest req,
           ILogger log)
         {
 

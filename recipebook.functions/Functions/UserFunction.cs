@@ -19,7 +19,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-user")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "user")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req,
             ILogger log)
         {
             var result = _manager.GetCurrent();

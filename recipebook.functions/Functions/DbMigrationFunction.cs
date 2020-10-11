@@ -19,7 +19,7 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-dbmigration")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "dbmigration")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "dbmigration")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Starting Migration");
