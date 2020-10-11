@@ -14,17 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazorclient", "recipebook.blazorclient\recipebook.blazorclient.csproj", "{8DAA3BAC-182F-47EA-A512-766531DF5641}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests (Unit)", "Tests (Unit)", "{007E685C-A7C7-464E-888E-BBE39A5955C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions.test", "recipebook.functions.test\recipebook.functions.test.csproj", "{A1696CE1-8B69-4214-A3EB-89A702432B69}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazor.test", "recipebook.blazor.test\recipebook.blazor.test.csproj", "{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazor.core", "recipebook.blazor.core\recipebook.blazor.core.csproj", "{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.blazorserver", "recipebook.blazorserver\recipebook.blazorserver.csproj", "{AEC5266D-0341-4B38-AEF3-E0E12415444F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,33 +36,16 @@ Global
 		{2796854E-84AB-46DC-81F7-FD237662A59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2796854E-84AB-46DC-81F7-FD237662A59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2796854E-84AB-46DC-81F7-FD237662A59C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4089CE78-BBAC-4900-BC0B-D13DE3A428F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AEC5266D-0341-4B38-AEF3-E0E12415444F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A1696CE1-8B69-4214-A3EB-89A702432B69} = {007E685C-A7C7-464E-888E-BBE39A5955C1}
-		{0B800A0B-4FD9-4B28-99A0-516ABC8AAA2F} = {007E685C-A7C7-464E-888E-BBE39A5955C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {41E5D0F0-91D8-40B9-B595-8006932581DB}
