@@ -26,3 +26,9 @@ jobs:
 
       - name: Run Unit Tests
         run: dotnet test --no-restore --verbosity normal
+        
+      - name: Publish Functions as Artifact
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          name: recipebook-functions
+          path: recipebook.functions/bin/Release/netcoreapp3.1
