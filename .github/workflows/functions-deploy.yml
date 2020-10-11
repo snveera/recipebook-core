@@ -15,11 +15,21 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v1
       with:
-        name: recipebook-functions
-        path: to-deploy
+        dotnet-version: 3.1.x
+
+    - name: Restore Nuget Package Dependencies
+      run: dotnet restore recipebook-core.sln
+
+    - name: Build Solution
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run Unit Tests
+      run: dotnet test --no-restore --verbosity normal
     
     - name: 'Service Principal Login'
       uses: azure/login@v1
@@ -31,7 +41,7 @@ jobs:
       id: fa
       with:
         app-name: recipebook-functions
-        package: to-deploy
+        package: recipebook.functions/bin/Release/netcoreapp3.1
 
     - name: logout
       run: |
