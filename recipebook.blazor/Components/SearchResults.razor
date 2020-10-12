@@ -26,7 +26,7 @@
 
     public void NavigateToRecipe(string id)
     {
-        Navigation.NavigateTo($"recipes/{id}");
+        Navigation.NavigateTo(string.Format(Routes.RecipeDetails,id));
     }
 
 }

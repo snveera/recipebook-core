@@ -9,6 +9,6 @@
 
     public void ShowEditor()
     {
-        Navigation.NavigateTo($"/recipes/{Recipe.Id}/edit");
+        Navigation.NavigateTo(string.Format(Routes.RecipeEdit,Recipe.Id));
     }
 }

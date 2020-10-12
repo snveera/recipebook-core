@@ -1,4 +1,5 @@
-﻿@inject NavigationManager Navigation
+﻿@using Models 
+@inject NavigationManager Navigation
 
 <button class="btn btn-outline-secondary" @onclick="ShowEditor">Add</button>
 
@@ -6,6 +7,6 @@
 
     public void ShowEditor()
     {
-        Navigation.NavigateTo($"/recipes/create");
+        Navigation.NavigateTo(Routes.RecipeCreate);
     }
 }
