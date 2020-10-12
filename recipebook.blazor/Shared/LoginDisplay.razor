@@ -6,17 +6,15 @@
 
 <AuthorizeView>
     <Authorized>
-
-        <button class="nav-link btn btn-link" @onclick="BeginLogout">Log out</button>
-
-        @*<div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @context.User.Identity.Name
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" @onclick="BeginLogout">Log Out</a>
+            <div class="dropdown-menu">
+                <button class="dropdown-item btn btn-info" type="button">Claims</button>
+                <button class="dropdown-item btn btn-warning" type="button" @onclick="BeginLogout">Log out</button>
             </div>
-        </div>*@
+        </div>
     </Authorized>
     <NotAuthorized>
         <a href="authentication/login">Log in</a>
