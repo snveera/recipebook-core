@@ -80,5 +80,19 @@ namespace recipebook.functions.Functions
 
             return new OkObjectResult(result);
         }
+
+        [FunctionName("api-recipe-delete")]
+        public async Task<IActionResult> Delete(
+          [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "recipe/{id}")] HttpRequest req,
+          string id,
+          ILogger log,
+          ClaimsPrincipal user)
+        {
+            if (!_authorizationManager.CanManageRecipes(user)) return new ForbidResult();
+
+            await _manager.Delete(id);
+
+            return new OkResult();
+        }
     }
 }

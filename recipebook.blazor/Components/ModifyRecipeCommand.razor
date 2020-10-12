@@ -1,7 +1,11 @@
 ﻿@using Models; 
+@using Repositories;
+ 
 @inject NavigationManager Navigation
+@inject RecipeRepository RecipeRepository
 
 <button type="button" class="btn btn-outline-primary" @onclick="ShowEditor">Modify</button>
+<button type="button" class="btn btn-outline-danger ml-2" @onclick="@(async e => await Delete())">Delete</button>
 
 @code {
     [Parameter]
@@ -10,5 +14,11 @@
     public void ShowEditor()
     {
         Navigation.NavigateTo(string.Format(Routes.RecipeEdit,Recipe.Id));
+    }
+
+    public async Task Delete()
+    {
+        await RecipeRepository.DeleteAsync(Recipe);
+        Navigation.NavigateTo(Routes.SearchResults);
     }
 }

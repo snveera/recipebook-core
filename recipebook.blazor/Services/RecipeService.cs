@@ -51,5 +51,13 @@ namespace recipebook.blazor.Services
 
             response.EnsureSuccessStatusCode();
         }
+
+        public async Task Delete(string id)
+        {
+            var client = _httpClientFactory.CreateClient("RecipeApiAuthenticated");
+            var response = await client.DeleteAsync($"api/recipe/{id}");
+            response.EnsureSuccessStatusCode();
+
+        }
     }
 }

@@ -6,7 +6,7 @@
 @inject AppState AppState
 
 <button type="button" class="btn btn-success" @onclick="@(async e=> await SaveChanges())">Save</button>
-<button type="button" class="btn btn-danger" @onclick="CancelChanges">Cancel</button>
+<button type="button" class="btn btn-secondary" @onclick="CancelChanges">Cancel</button>
 
 @code {
     [Parameter]

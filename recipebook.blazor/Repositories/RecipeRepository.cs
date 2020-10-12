@@ -43,6 +43,12 @@ namespace recipebook.blazor.Repositories
             return _recipeService.Update(dataToSave);
         }
 
+        public Task DeleteAsync(RecipeViewModel toSave)
+        {
+            if (toSave == null) return Task.FromResult(true);
+            return _recipeService.Delete(toSave.Id);
+        }
+
         private RecipeViewModel Map(Recipe toMap)
         {
             return new RecipeViewModel 

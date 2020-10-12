@@ -48,5 +48,10 @@ namespace recipebook.core.Managers
 
             return response;
         }
+
+        public  Task Delete(string id)
+        {
+            return _repository.Delete(id);
+        }
     }
 }

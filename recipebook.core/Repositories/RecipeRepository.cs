@@ -33,6 +33,7 @@ namespace recipebook.core.Repositories
                 query = query
                     .ToList() // Force this to run client side since the implementation (currently Cosmos) does not implement the contains
                     .AsQueryable()
+                    .Where(r=>!r.IsDeleted)
                     .Where(r => r.Name != null && r.Category != null)
                     .Where(r => r.Name.ContainsCaseInsensitive(criteria)|| r.Category.ContainsCaseInsensitive(criteria));
             }
@@ -86,6 +87,15 @@ namespace recipebook.core.Repositories
                 return response;
             }
 
+        }
+
+        public async Task Delete(string id)
+        {
+            var item = await _dbContext.Recipes
+               .FindAsync(id);
+
+            item.IsDeleted = true;
+            await _dbContext.SaveChangesAsync();
         }
 
         private static Recipe Map(entityframework.Models.Recipe toMap)
