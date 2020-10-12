@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{3088C2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9AEDC1C1-6A3A-41B2-A3A8-441FCDCB3ADB}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\blazor-deploy.yml = .github\workflows\blazor-deploy.yml
 		.github\workflows\ci-build.yml = .github\workflows\ci-build.yml
 		.github\workflows\functions-deploy.yml = .github\workflows\functions-deploy.yml
 	EndProjectSection
