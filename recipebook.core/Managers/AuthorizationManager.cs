@@ -6,7 +6,7 @@ namespace recipebook.core.Managers
     {
         public bool CanManageRecipes(ClaimsPrincipal user)
         {
-            return user != null;
+            return user?.Identity?.IsAuthenticated ?? false;
         }
     }
 }

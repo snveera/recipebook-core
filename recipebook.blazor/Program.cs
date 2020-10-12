@@ -65,7 +65,7 @@ namespace recipebook.blazor
             builder.Services.AddSingleton<AppState>();
 
             builder.Services.AddSingleton<CategoryRepository>();
-            builder.Services.AddSingleton<RecipeRepository>();
+            builder.Services.AddTransient<RecipeRepository>();
         }
     }
 }

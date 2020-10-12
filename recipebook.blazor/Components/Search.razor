@@ -27,10 +27,21 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var data = await CategoryRepository.GetAsync();
-        Categories = data
-            .OrderBy(c=>c.Name)
-            .ToList();
+        try
+        {
+            IsWorking = true;
+
+            var data = await CategoryRepository.GetAsync();
+            Categories = data
+                .OrderBy(c => c.Name)
+                .ToList();
+        }
+        finally
+        {
+            IsWorking = false;
+        }
+
+
 
         await base.OnInitializedAsync();
     }
@@ -48,7 +59,7 @@
 
             AppState.SearchError = null;
 
-            Navigation.NavigateTo("");
+            Navigation.NavigateTo(Routes.SearchResults);
         }
         catch
         {
