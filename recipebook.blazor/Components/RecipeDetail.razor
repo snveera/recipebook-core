@@ -1,46 +1,58 @@
 ﻿@using Models;
  
-<h1 class="display-4">
-    @Recipe?.Name<br />
-    <small class="text-muted">@Recipe?.Category</small>
-</h1>
-
-@if (Recipe?.Servings != null)
+@if (Recipe != null)
 {
-    <p class="lead">Serves @Recipe?.Servings</p>
-}
-<div class="row">
-    <div class="col-md-12">
-        <dl>
-            <dt>Ingredients</dt>
-            <dd>
-                <ul style="list-style-type: none;">
-                    @foreach (var item in Recipe?.Ingredients ?? new List<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ul>
-            </dd>
+    <h1 class="display-4">
+        @Recipe.Name<br />
+        <small class="text-muted">@Recipe.Category</small>
+    </h1>
 
-            <dt>Directions</dt>
-            <dd>
-                <ol>
-                    @foreach (var item in Recipe?.Directions ?? new List<string>())
-                    {
-                        <li>@item</li>
-                    }
-                </ol>
-            </dd>
+    @if (Recipe?.Servings != null)
+    {
+        <p class="lead">Serves @Recipe.Servings</p>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <dl>
+                <dt>Ingredients</dt>
+                <dd>
+                    <ul style="list-style-type: none;">
+                        @foreach (var item in Recipe.Ingredients ?? new List<string>())
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                </dd>
 
-            @if (!string.IsNullOrWhiteSpace(Recipe?.Source))
-            {
-                <dt>Source</dt>
-                <dd>@Recipe?.Source</dd>
-            }
-        </dl>
+                <dt>Directions</dt>
+                <dd>
+                    <ol>
+                        @foreach (var item in Recipe.Directions ?? new List<string>())
+                        {
+                            <li>@item</li>
+                        }
+                    </ol>
+                </dd>
+
+                @if (!string.IsNullOrWhiteSpace(Recipe.Source))
+                {
+                    <dt>Source</dt>
+                    <dd>
+                        @if (Recipe.Source.StartsWith("http"))
+                        {
+                            <a href="@Recipe.Source" target="_blank">@Recipe.Source</a>
+                        }
+                        else
+                        {
+                            @Recipe?.Source
+                        }
+
+                    </dd>
+                }
+            </dl>
+        </div>
     </div>
-</div>
-
+}
 @code {
     [Parameter]
     public RecipeViewModel Recipe { get; set; }
