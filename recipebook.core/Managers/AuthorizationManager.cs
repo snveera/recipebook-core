@@ -8,5 +8,10 @@ namespace recipebook.core.Managers
         {
             return user?.Identity?.IsAuthenticated ?? false;
         }
+
+        public bool CanManageDatabase(ClaimsPrincipal user)
+        {
+            return user?.Identity?.IsAuthenticated ?? false;
+        }
     }
 }
