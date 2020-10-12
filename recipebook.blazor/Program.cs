@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using recipebook.blazor.Services;
 
 namespace recipebook.blazor
 {
@@ -21,6 +22,9 @@ namespace recipebook.blazor
 
             RegisterDefaultHttpClient(builder);
             RegisterGraphHttpClient(builder);
+            RegisterApiHttpClient(builder);
+
+            RegisterServices(builder);
 
             builder.Services.AddMsalAuthentication(options =>
             {
@@ -42,8 +46,19 @@ namespace recipebook.blazor
                 client.BaseAddress = new Uri("https://graph.microsoft.com"))
                     .AddHttpMessageHandler(sp => sp.GetRequiredService<AuthorizationMessageHandler>()
                     .ConfigureHandler(new[] { "https://graph.microsoft.com" }, new[] { "https://graph.microsoft.com/User.Read" }));
+        }
 
+        private static void RegisterApiHttpClient(WebAssemblyHostBuilder builder)
+        {
+            var baseAddress = builder.Configuration["ApiBaseUri"];
+            builder.Services.AddHttpClient("RecipeApi", client =>
+                client.BaseAddress = new Uri(baseAddress));
+        }
 
+        private static void RegisterServices(WebAssemblyHostBuilder builder)
+        {
+            builder.Services.AddTransient<CategoryService>();
+            builder.Services.AddTransient<RecipeService>();
         }
     }
 }

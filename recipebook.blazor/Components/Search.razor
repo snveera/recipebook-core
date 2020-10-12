@@ -1,16 +1,59 @@
-﻿<div class="form-inline">
-    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
-    <select class="form-control mr-sm-3" id="categories">
+﻿@using Models;
+@using Services; 
+@using System.Linq;
+ 
+@inject CategoryService CategoryService
+@inject RecipeService RecipeService
+
+<div class="form-inline">
+    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" @bind="SearchText">
+    <select class="form-control mr-sm-3" id="categories" @bind="Category">
         <option>Category</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        @foreach (var item in Categories)
+        {
+            <option>@item.Name</option>
+        }
     </select>
-    <button class="btn btn-light">Search</button>
+    <button class="btn btn-light" disabled="@IsWorking" @onclick="SearchAsync">Search</button>
 </div>
 
 @code {
+    public List<Category> Categories { get; set; } = new List<Category>();
+    public List<Recipe> SearchResults { get; set; } = new List<Recipe>();
+    public string SearchText { get; set; }
+    public string Category { get; set; }
+    public bool IsWorking { get; set; } = false;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await CategoryService.GetCategories();
+        Categories = data
+            .OrderBy(c=>c.Name)
+            .ToList();
+
+        await base.OnInitializedAsync();
+    }
+
+    public async Task SearchAsync()
+    {
+        try
+        {
+            IsWorking = true;
+            var data = await RecipeService.Search(this.SearchText, this.Category);
+
+            SearchResults = data
+                .OrderBy(r => r.Name)
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            SearchText = ex.ToString();
+        }
+        finally
+        {
+            IsWorking = false;
+        }
+
+
+    }
 }

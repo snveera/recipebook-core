@@ -19,7 +19,7 @@ namespace recipebook.core.Managers
             var resolvedCriteria = string.IsNullOrWhiteSpace(criteria) ? null : criteria;
             var resolvedCategory = string.IsNullOrWhiteSpace(category) ? null : category;
 
-            var data = _repository.Get(criteria, category);
+            var data = _repository.Get(resolvedCriteria, resolvedCategory);
 
             return data;
         }
