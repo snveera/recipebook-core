@@ -10,10 +10,10 @@
 <div class="form-inline">
     <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" @bind="SearchText" disabled="@IsWorking">
     <select class="form-control mr-sm-3" id="categories" @bind="Category" disabled="@IsWorking">
-        <option>Category</option>
+        <option value=""></option>
         @foreach (var item in Categories)
         {
-            <option>@item.Name</option>
+            <option value="@item.Name">@item.Name</option>
         }
     </select>
     <button class="btn btn-light" disabled="@IsWorking" @onclick="SearchAsync">Search</button>
