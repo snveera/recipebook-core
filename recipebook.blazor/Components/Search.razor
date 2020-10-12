@@ -4,6 +4,7 @@
  
 @inject CategoryService CategoryService
 @inject RecipeService RecipeService
+@inject AppState AppState 
 
 <div class="form-inline">
     <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" @bind="SearchText">
@@ -19,7 +20,6 @@
 
 @code {
     public List<Category> Categories { get; set; } = new List<Category>();
-    public List<Recipe> SearchResults { get; set; } = new List<Recipe>();
     public string SearchText { get; set; }
     public string Category { get; set; }
     public bool IsWorking { get; set; } = false;
@@ -41,9 +41,11 @@
             IsWorking = true;
             var data = await RecipeService.Search(this.SearchText, this.Category);
 
-            SearchResults = data
+            AppState.SearchResults = data
                 .OrderBy(r => r.Name)
                 .ToList();
+
+            StateHasChanged();
         }
         catch (Exception ex)
         {

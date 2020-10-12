@@ -24,7 +24,7 @@ namespace recipebook.blazor.Services
             response.EnsureSuccessStatusCode();
 
             var data = await response.Content.ReadFromJsonAsync<List<Recipe>>();
-            return data;
+            return data.Where(r=>r!=null).ToList();
         }
     }
 }

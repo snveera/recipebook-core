@@ -1,3 +1,10 @@
 ﻿@page "/"
+@using Models; 
+@inject AppState AppState
 
 <h1>Recipe Book</h1>
+
+@foreach(var item in AppState.SearchResults)
+{
+    @item <br/>
+}
