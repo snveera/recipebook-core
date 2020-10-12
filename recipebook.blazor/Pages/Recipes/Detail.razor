@@ -4,13 +4,16 @@
 
 @inject RecipeRepository RecipeRepository
 
-<RecipeDetail Recipe="@Data"/>
+@if (Data != null)
+{
+    <RecipeDetail Recipe="@Data"/>
 
-<AuthorizeView>
-    <Authorized>
-        <ModifyRecipeCommand Recipe="@Data"/>
-    </Authorized>
-</AuthorizeView>
+    <AuthorizeView>
+        <Authorized>
+            <ModifyRecipeCommand Recipe="@Data"/>
+        </Authorized>
+    </AuthorizeView>
+}
 
 @code {
     [Parameter]
