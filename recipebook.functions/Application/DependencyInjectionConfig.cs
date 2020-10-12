@@ -21,6 +21,7 @@ namespace recipebook.functions.Application
             builderServices.AddTransient<RecipeRepository>();
 
             builderServices.AddTransient<HealthManager>();
+            builderServices.AddTransient<AuthorizationManager>();
             
             builderServices.AddTransient(c =>
             {

@@ -1,6 +1,7 @@
 ﻿using recipebook.core.Models;
 using recipebook.core.Repositories;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace recipebook.core.Managers
@@ -8,10 +9,12 @@ namespace recipebook.core.Managers
     public class RecipeManager
     {
         private RecipeRepository _repository;
+        private readonly AuthorizationManager _authorizationManager;
 
-        public RecipeManager(RecipeRepository repository)
+        public RecipeManager(RecipeRepository repository, AuthorizationManager authorizationManager)
         {
             _repository = repository;
+            _authorizationManager = authorizationManager;
         }
 
         public async Task<IReadOnlyCollection<Recipe>> Search(string criteria, string category)
@@ -33,6 +36,7 @@ namespace recipebook.core.Managers
 
         public async Task<Recipe> Create(Recipe toSave)
         {
+
             var response = await _repository.Create(toSave);
 
             return response;

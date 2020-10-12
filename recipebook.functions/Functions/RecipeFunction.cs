@@ -15,10 +15,12 @@ namespace recipebook.functions.Functions
     public class RecipeFunction
     {
         private readonly RecipeManager _manager;
+        private readonly AuthorizationManager _authorizationManager;
 
-        public RecipeFunction(RecipeManager manager)
+        public RecipeFunction(RecipeManager manager, AuthorizationManager authorizationManager)
         {
             _manager = manager;
+            _authorizationManager = authorizationManager;
         }
 
         [FunctionName("api-recipe-get-all")]
@@ -53,6 +55,7 @@ namespace recipebook.functions.Functions
            ILogger log,
            ClaimsPrincipal user)
         {
+            if (!_authorizationManager.CanManageRecipes(user)) return new ForbidResult();
 
             var data = await req.ReadAsStringAsync();
             var recipeData = JsonConvert.DeserializeObject<Recipe>(data);
@@ -68,6 +71,7 @@ namespace recipebook.functions.Functions
           ILogger log,
           ClaimsPrincipal user)
         {
+            if (!_authorizationManager.CanManageRecipes(user)) return new ForbidResult();
 
             var data = await req.ReadAsStringAsync();
             var recipeData = JsonConvert.DeserializeObject<Recipe>(data);

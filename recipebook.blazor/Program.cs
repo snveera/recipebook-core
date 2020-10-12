@@ -23,15 +23,16 @@ namespace recipebook.blazor
             builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
             RegisterDefaultHttpClient(builder);
-            RegisterGraphHttpClient(builder);
             RegisterApiHttpClient(builder);
 
             RegisterServices(builder);
 
             builder.Services.AddMsalAuthentication(options =>
             {
+                var permission = builder.Configuration["ApiPermission"];
+
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
-                options.ProviderOptions.DefaultAccessTokenScopes.Add("https://graph.microsoft.com/User.Read");
+                options.ProviderOptions.DefaultAccessTokenScopes.Add(permission);
             });
 
             await builder.Build().RunAsync();
@@ -42,19 +43,18 @@ namespace recipebook.blazor
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
         }
 
-        private static void RegisterGraphHttpClient(WebAssemblyHostBuilder builder)
-        {
-            builder.Services.AddHttpClient("GraphApi", client =>
-                client.BaseAddress = new Uri("https://graph.microsoft.com"))
-                    .AddHttpMessageHandler(sp => sp.GetRequiredService<AuthorizationMessageHandler>()
-                    .ConfigureHandler(new[] { "https://graph.microsoft.com" }, new[] { "https://graph.microsoft.com/User.Read" }));
-        }
-
         private static void RegisterApiHttpClient(WebAssemblyHostBuilder builder)
         {
             var baseAddress = builder.Configuration["ApiBaseUri"];
+            var permission = builder.Configuration["ApiPermission"];
+
             builder.Services.AddHttpClient("RecipeApi", client =>
                 client.BaseAddress = new Uri(baseAddress));
+
+            builder.Services.AddHttpClient("RecipeApiAuthenticated", client =>
+               client.BaseAddress = new Uri(baseAddress))
+                .AddHttpMessageHandler(sp => sp.GetRequiredService<AuthorizationMessageHandler>()
+                .ConfigureHandler(new[] { baseAddress }, new[] { permission }));
         }
 
         private static void RegisterServices(WebAssemblyHostBuilder builder)

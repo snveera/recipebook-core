@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using recipebook.core.Models;
 using recipebook.functions.Functions;
 using recipebook.functions.test.TestUtility;
@@ -137,10 +138,11 @@ namespace recipebook.functions.test
         }
 
         [Fact]
-        public async Task Create_ValidRecipe_SuccessfullySaves()
+        public async Task Create_AuthenticatedUserAndValidRecipe_SuccessfullySaves()
         {
             // Given
             var root = TestCompositionRoot.Create();
+            root.WithAuthenticatedUser("the-user");
 
             var api = root.Get<RecipeFunction>();
             var postData = new Recipe
@@ -171,11 +173,38 @@ namespace recipebook.functions.test
             Assert.Equal("the-category", matchingResult.Category);
         }
 
+
         [Fact]
-        public async Task Update_ValidRecipe_SuccessfullySaves()
+        public async Task Create_UnAuthenticatedUserValidRecipe_ReturnsForbid()
         {
             // Given
             var root = TestCompositionRoot.Create();
+
+            var api = root.Get<RecipeFunction>();
+            var postData = new Recipe
+            {
+                Name = "the-new-item",
+                Ingredients = "something to add",
+                Directions = "what to do",
+                Servings = 1,
+                Source = "the-test",
+                Rating = 3,
+                Category = "the-category"
+            };
+
+            // When
+            var createResult = await api.Create(root.PostRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<ForbidResult>(createResult);
+        }
+
+        [Fact]
+        public async Task Update_AuthenticatdUserValidRecipe_SuccessfullySaves()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithAuthenticatedUser("the-user");
             root.WithRecipe(id: "the-identifier", name: "the-old-name");
 
             var api = root.Get<RecipeFunction>();
@@ -207,6 +236,33 @@ namespace recipebook.functions.test
             Assert.Equal("the-test", matchingResult.Source);
             Assert.Equal(3, matchingResult.Rating);
             Assert.Equal("the-category", matchingResult.Category);
+        }
+
+        [Fact]
+        public async Task Update_UnAuthenticatdUserValidRecipe_ReturnsForbidden()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithRecipe(id: "the-identifier", name: "the-old-name");
+
+            var api = root.Get<RecipeFunction>();
+            var postData = new Recipe
+            {
+                Id = "the-identifier",
+                Name = "the-new-item",
+                Ingredients = "something to add",
+                Directions = "what to do",
+                Servings = 1,
+                Source = "the-test",
+                Rating = 3,
+                Category = "the-category"
+            };
+
+            // When
+            var updateResult = await api.Update(root.PutRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<ForbidResult>(updateResult);
         }
     }
 }
