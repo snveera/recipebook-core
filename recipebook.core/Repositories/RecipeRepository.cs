@@ -22,9 +22,10 @@ namespace recipebook.core.Repositories
         public IReadOnlyCollection<Recipe> Get(string criteria, string category)
         {
             var query = _dbContext.Recipes
-                .AsNoTracking();
+                .AsNoTracking()
+                .Where(r => r.IsDeleted == null || r.IsDeleted == false);
 
-            if(category != null)
+            if (category != null)
             {
                 query = query.Where(r => r.Category == category);
             }
@@ -33,7 +34,6 @@ namespace recipebook.core.Repositories
                 query = query
                     .ToList() // Force this to run client side since the implementation (currently Cosmos) does not implement the contains
                     .AsQueryable()
-                    .Where(r=>!r.IsDeleted)
                     .Where(r => r.Name != null && r.Category != null)
                     .Where(r => r.Name.ContainsCaseInsensitive(criteria)|| r.Category.ContainsCaseInsensitive(criteria));
             }

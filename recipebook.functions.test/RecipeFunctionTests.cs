@@ -264,5 +264,42 @@ namespace recipebook.functions.test
             // Then
             Assert.IsAssignableFrom<ForbidResult>(updateResult);
         }
+
+        [Fact]
+        public async Task Delete_UnAuthenticatdUserValidRecipe_ReturnsForbidden()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithRecipe(id: "the-identifier", name: "the-old-name");
+
+            var api = root.Get<RecipeFunction>();
+            // When
+            var deleteResult = await api.Delete(root.DeleteRequest(), "the-identifier", root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<ForbidResult>(deleteResult);
+        }
+
+        [Fact]
+        public async Task Delete_AuthenticatedUserValidRecipe_RecipeDoesNoShowInSearchResults()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithAuthenticatedUser("the-user");
+            root.WithRecipe(id: "the-identifier", name: "the-old-name");
+
+            var api = root.Get<RecipeFunction>();
+
+            // When
+            var deleteResult = await api.Delete(root.DeleteRequest(), "the-identifier", root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<OkResult>(deleteResult);
+
+            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
+            var getData = getResult.AssertIsOkResultWithValue<ICollection<Recipe>>();
+
+            Assert.DoesNotContain("the-identifier", getData.Select(r => r.Id).ToList());
+        }
     }
 }

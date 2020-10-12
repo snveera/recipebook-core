@@ -29,6 +29,6 @@ namespace recipebook.entityframework.Models
 
         public string UpdatedBy { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
     }
 }
