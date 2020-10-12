@@ -14,15 +14,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazorclient", "recipebook.blazorclient\recipebook.blazorclient.csproj", "{8DAA3BAC-182F-47EA-A512-766531DF5641}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests (Unit)", "Tests (Unit)", "{007E685C-A7C7-464E-888E-BBE39A5955C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.functions.test", "recipebook.functions.test\recipebook.functions.test.csproj", "{A1696CE1-8B69-4214-A3EB-89A702432B69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.datatransfer", "recipebook.datatransfer\recipebook.datatransfer.csproj", "{AD1EA128-8EF2-4744-ACFE-779268D810F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "recipebook.blazor", "recipebook.blazor\recipebook.blazor.csproj", "{DB77753C-1F7E-415C-8343-8E4E6896B356}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipebook.datatransfer.core", "recipebook.datatransfer.core\recipebook.datatransfer.core.csproj", "{AC5974AA-64B8-4839-A03C-4C40AFBE628B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{3088C2EA-A411-4CE5-99AF-7D9FCA5AFD2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9AEDC1C1-6A3A-41B2-A3A8-441FCDCB3ADB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\blazor-deploy.yml = .github\workflows\blazor-deploy.yml
+		.github\workflows\ci-build.yml = .github\workflows\ci-build.yml
+		.github\workflows\functions-deploy.yml = .github\workflows\functions-deploy.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +49,6 @@ Global
 		{2796854E-84AB-46DC-81F7-FD237662A59C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2796854E-84AB-46DC-81F7-FD237662A59C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2796854E-84AB-46DC-81F7-FD237662A59C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DAA3BAC-182F-47EA-A512-766531DF5641}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1696CE1-8B69-4214-A3EB-89A702432B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,12 +61,18 @@ Global
 		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC5974AA-64B8-4839-A03C-4C40AFBE628B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB77753C-1F7E-415C-8343-8E4E6896B356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB77753C-1F7E-415C-8343-8E4E6896B356}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB77753C-1F7E-415C-8343-8E4E6896B356}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB77753C-1F7E-415C-8343-8E4E6896B356}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A1696CE1-8B69-4214-A3EB-89A702432B69} = {007E685C-A7C7-464E-888E-BBE39A5955C1}
+		{3088C2EA-A411-4CE5-99AF-7D9FCA5AFD2A} = {DD2F5606-B2AB-4312-B22F-236130D937AA}
+		{9AEDC1C1-6A3A-41B2-A3A8-441FCDCB3ADB} = {3088C2EA-A411-4CE5-99AF-7D9FCA5AFD2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {41E5D0F0-91D8-40B9-B595-8006932581DB}

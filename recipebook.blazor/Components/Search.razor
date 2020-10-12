@@ -1,0 +1,75 @@
+﻿@using Models;
+@using System.Linq;
+@using Repositories;
+
+@inject CategoryRepository CategoryRepository
+@inject RecipeRepository RecipeRepository
+@inject AppState AppState 
+@inject NavigationManager Navigation
+
+<div class="form-inline">
+    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" @bind="SearchText" disabled="@IsWorking">
+    <select class="form-control mr-sm-3" id="categories" @bind="Category" disabled="@IsWorking">
+        <option>Category</option>
+        @foreach (var item in Categories)
+        {
+            <option>@item.Name</option>
+        }
+    </select>
+    <button class="btn btn-light" disabled="@IsWorking" @onclick="SearchAsync">Search</button>
+</div>
+
+@code {
+    public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+    public string SearchText { get; set; }
+    public string Category { get; set; }
+    public bool IsWorking { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            IsWorking = true;
+
+            var data = await CategoryRepository.GetAsync();
+            Categories = data
+                .OrderBy(c => c.Name)
+                .ToList();
+        }
+        finally
+        {
+            IsWorking = false;
+        }
+
+
+
+        await base.OnInitializedAsync();
+    }
+
+    public async Task SearchAsync()
+    {
+        try
+        {
+            IsWorking = true;
+            var data = await RecipeRepository.SearchAsync(this.SearchText, this.Category);
+
+            AppState.SearchResults = data
+                .OrderBy(r => r.Name)
+                .ToList();
+
+            AppState.SearchError = null;
+
+            Navigation.NavigateTo(Routes.SearchResults);
+        }
+        catch
+        {
+            AppState.SearchError = "Error when searching";
+        }
+        finally
+        {
+            IsWorking = false;
+        }
+
+
+    }
+}

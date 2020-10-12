@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using recipebook.core.Models;
 using recipebook.functions.Functions;
 using recipebook.functions.test.TestUtility;
@@ -23,7 +24,7 @@ namespace recipebook.functions.test
             var api = root.Get<RecipeFunction>();
 
             // When
-            var result = await api.GetAll(root.GetRequest(), root.CoreLogger());
+            var result = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -45,7 +46,7 @@ namespace recipebook.functions.test
                 .WithCategoryParameter("cat-1");
 
             // When
-            var result = await api.GetAll(request, root.CoreLogger());
+            var result = await api.GetAll(request, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -70,7 +71,7 @@ namespace recipebook.functions.test
             var request = root.GetRequest()
                 .WithSearchCriteriaParameter(searchCriteria);
             // When
-            var result = await api.GetAll(request, root.CoreLogger());
+            var result = await api.GetAll(request, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -95,7 +96,7 @@ namespace recipebook.functions.test
                 .WithCategoryParameter("cat-1");
 
             // When
-            var result = await api.GetAll(request, root.CoreLogger());
+            var result = await api.GetAll(request, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<IReadOnlyList<Recipe>>();
@@ -122,7 +123,7 @@ namespace recipebook.functions.test
             var api = root.Get<RecipeFunction>();
 
             // When
-            var result = await api.GetItem(root.GetRequest(), recipe2Id, root.CoreLogger());
+            var result = await api.GetItem(root.GetRequest(), recipe2Id, root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var data = result.AssertIsOkResultWithValue<Recipe>();
@@ -137,10 +138,11 @@ namespace recipebook.functions.test
         }
 
         [Fact]
-        public async Task Create_ValidRecipe_SuccessfullySaves()
+        public async Task Create_AuthenticatedUserAndValidRecipe_SuccessfullySaves()
         {
             // Given
             var root = TestCompositionRoot.Create();
+            root.WithAuthenticatedUser("the-user");
 
             var api = root.Get<RecipeFunction>();
             var postData = new Recipe
@@ -155,10 +157,10 @@ namespace recipebook.functions.test
             };
 
             // When
-            var createResult = await api.Create(root.PostRequest(postData), root.CoreLogger());
+            var createResult = await api.Create(root.PostRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
-            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger());
+            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
             var getData = getResult.AssertIsOkResultWithValue<ICollection<Recipe>>();
 
             var matchingResult = getData.SingleOrDefault(r => r.Name == "the-new-item");
@@ -171,8 +173,73 @@ namespace recipebook.functions.test
             Assert.Equal("the-category", matchingResult.Category);
         }
 
+
         [Fact]
-        public async Task Update_ValidRecipe_SuccessfullySaves()
+        public async Task Create_UnAuthenticatedUserValidRecipe_ReturnsForbid()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+
+            var api = root.Get<RecipeFunction>();
+            var postData = new Recipe
+            {
+                Name = "the-new-item",
+                Ingredients = "something to add",
+                Directions = "what to do",
+                Servings = 1,
+                Source = "the-test",
+                Rating = 3,
+                Category = "the-category"
+            };
+
+            // When
+            var createResult = await api.Create(root.PostRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<ForbidResult>(createResult);
+        }
+
+        [Fact]
+        public async Task Update_AuthenticatdUserValidRecipe_SuccessfullySaves()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithAuthenticatedUser("the-user");
+            root.WithRecipe(id: "the-identifier", name: "the-old-name");
+
+            var api = root.Get<RecipeFunction>();
+            var postData = new Recipe
+            {
+                Id = "the-identifier",
+                Name = "the-new-item",
+                Ingredients = "something to add",
+                Directions = "what to do",
+                Servings = 1,
+                Source = "the-test",
+                Rating = 3,
+                Category = "the-category"
+            };
+
+            // When
+            var updateResult = await api.Update(root.PutRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
+            var getData = getResult.AssertIsOkResultWithValue<ICollection<Recipe>>();
+
+            var matchingResult = getData.SingleOrDefault(r => r.Name == "the-new-item");
+            Assert.NotNull(matchingResult);
+            Assert.Equal("the-identifier", matchingResult.Id);
+            Assert.Equal("something to add", matchingResult.Ingredients);
+            Assert.Equal("what to do", matchingResult.Directions);
+            Assert.Equal(1, matchingResult.Servings);
+            Assert.Equal("the-test", matchingResult.Source);
+            Assert.Equal(3, matchingResult.Rating);
+            Assert.Equal("the-category", matchingResult.Category);
+        }
+
+        [Fact]
+        public async Task Update_UnAuthenticatdUserValidRecipe_ReturnsForbidden()
         {
             // Given
             var root = TestCompositionRoot.Create();
@@ -192,21 +259,47 @@ namespace recipebook.functions.test
             };
 
             // When
-            var updateResult = await api.Update(root.PutRequest(postData), root.CoreLogger());
+            var updateResult = await api.Update(root.PutRequest(postData), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
-            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger());
+            Assert.IsAssignableFrom<ForbidResult>(updateResult);
+        }
+
+        [Fact]
+        public async Task Delete_UnAuthenticatdUserValidRecipe_ReturnsForbidden()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithRecipe(id: "the-identifier", name: "the-old-name");
+
+            var api = root.Get<RecipeFunction>();
+            // When
+            var deleteResult = await api.Delete(root.DeleteRequest(), "the-identifier", root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<ForbidResult>(deleteResult);
+        }
+
+        [Fact]
+        public async Task Delete_AuthenticatedUserValidRecipe_RecipeDoesNoShowInSearchResults()
+        {
+            // Given
+            var root = TestCompositionRoot.Create();
+            root.WithAuthenticatedUser("the-user");
+            root.WithRecipe(id: "the-identifier", name: "the-old-name");
+
+            var api = root.Get<RecipeFunction>();
+
+            // When
+            var deleteResult = await api.Delete(root.DeleteRequest(), "the-identifier", root.CoreLogger(), root.AuthenticatedUser());
+
+            // Then
+            Assert.IsAssignableFrom<OkResult>(deleteResult);
+
+            var getResult = await api.GetAll(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
             var getData = getResult.AssertIsOkResultWithValue<ICollection<Recipe>>();
 
-            var matchingResult = getData.SingleOrDefault(r => r.Name == "the-new-item");
-            Assert.NotNull(matchingResult);
-            Assert.Equal("the-identifier", matchingResult.Id);
-            Assert.Equal("something to add", matchingResult.Ingredients);
-            Assert.Equal("what to do", matchingResult.Directions);
-            Assert.Equal(1, matchingResult.Servings);
-            Assert.Equal("the-test", matchingResult.Source);
-            Assert.Equal(3, matchingResult.Rating);
-            Assert.Equal("the-category", matchingResult.Category);
+            Assert.DoesNotContain("the-identifier", getData.Select(r => r.Id).ToList());
         }
     }
 }

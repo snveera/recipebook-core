@@ -1,0 +1,34 @@
+﻿@page "/"
+@using Models;
+
+@implements IDisposable
+
+@inject AppState AppState
+
+@if (AppState.SearchResults == null)
+{
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Recipe Book</h1>
+            <p class="lead">A place to hold all your food instructions and lists</p>
+        </div>
+    </div>
+}
+else
+{
+    <SearchResults />
+}
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.OnChange += StateHasChanged;
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+}

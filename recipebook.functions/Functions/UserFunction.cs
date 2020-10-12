@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -19,10 +20,11 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-user")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "user")] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req,
+            ILogger log,
+            ClaimsPrincipal user)
         {
-            var result = _manager.GetCurrent();
+            var result = _manager.Get(user);
 
             return new OkObjectResult(result);
         }

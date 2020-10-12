@@ -1,0 +1,16 @@
+﻿@page "/recipes/create"
+@using Models;
+@using Repositories;
+
+<RecipeEdit Recipe="@Data" />
+<SaveRecipeCommand Recipe="@Data" ReturnUri="" />
+@code {
+    public RecipeViewModel Data { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Data = new RecipeViewModel();
+
+        await base.OnParametersSetAsync();
+    }
+}

@@ -1,0 +1,32 @@
+﻿@using Models;
+
+@implements IDisposable
+
+@inject AppState AppState
+@inject NavigationManager Navigation
+
+<ul class="list-unstyled">
+    @foreach (var item in AppState.SearchResults ?? new List<RecipeViewModel>())
+    {
+        <li class="lead"><button type="button" class="btn btn-link" @onclick="@(e=>NavigateToRecipe(@item.Id))">@item.Name</button></li>
+    }
+</ul>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.OnChange += StateHasChanged;
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+    public void NavigateToRecipe(string id)
+    {
+        Navigation.NavigateTo(string.Format(Routes.RecipeDetails,id));
+    }
+
+}

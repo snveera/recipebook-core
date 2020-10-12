@@ -1,0 +1,37 @@
+name: Deploy recipebook.blazor
+env:
+  PUBLISH_DIR: recipebook.blazor/bin/Release/netstandard2.1/publish/wwwroot
+
+on:
+  workflow_run:
+    workflows: ["CI Build"]
+    branches: [master]
+    types: 
+      - completed
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run Unit Tests
+      run: dotnet test
+
+    - name: Publish app
+      run: dotnet publish -c Release
+
+    - name: Set base href in index
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
+      with:
+        html_path: ${{ env.PUBLISH_DIR }}/index.html
+        base_href: /recipebook-core/
+
+    - name: Publish to Github Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v1.5.1
+      with:
+        target_branch: release/blazor
+        build_dir: ${{ env.PUBLISH_DIR }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

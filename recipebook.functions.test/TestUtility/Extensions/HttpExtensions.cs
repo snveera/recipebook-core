@@ -15,6 +15,12 @@ namespace recipebook.functions.test.TestUtility.Extensions
             return request;
         }
 
+        public static HttpRequest DeleteRequest(this TestCompositionRoot root)
+        {
+            var request = new DefaultHttpRequest(new DefaultHttpContext()) { Method = "DELETE" };
+            return request;
+        }
+
         public static HttpRequest PostRequest<T>(this TestCompositionRoot root, T body)
         {
             var request = new DefaultHttpRequest(new DefaultHttpContext()) { Method = "POST" };

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -21,8 +22,10 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-category")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "category")] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "category")] HttpRequest req,
+            ILogger log,
+            ClaimsPrincipal user
+            )
         {
             var result = _manager.Get();
 
@@ -31,8 +34,9 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-category-create")]
         public async Task<IActionResult> Create(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "category")] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "category")] HttpRequest req,
+            ILogger log,
+            ClaimsPrincipal user)
         {
 
             var data = await req.ReadAsStringAsync();

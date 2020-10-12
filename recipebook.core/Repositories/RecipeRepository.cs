@@ -22,9 +22,10 @@ namespace recipebook.core.Repositories
         public IReadOnlyCollection<Recipe> Get(string criteria, string category)
         {
             var query = _dbContext.Recipes
-                .AsNoTracking();
+                .AsNoTracking()
+                .Where(r => r.IsDeleted == null || r.IsDeleted == false);
 
-            if(category != null)
+            if (category != null)
             {
                 query = query.Where(r => r.Category == category);
             }
@@ -88,8 +89,20 @@ namespace recipebook.core.Repositories
 
         }
 
+        public async Task Delete(string id)
+        {
+            var item = await _dbContext.Recipes
+               .FindAsync(id);
+
+            item.IsDeleted = true;
+            await _dbContext.SaveChangesAsync();
+        }
+
         private static Recipe Map(entityframework.Models.Recipe toMap)
         {
+            if (toMap == null)
+                return null;
+
             return new Recipe
             {
                 Id = toMap.Id,

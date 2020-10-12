@@ -1,0 +1,30 @@
+﻿@page "/recipes/{RecipeId}"
+@using Models;
+@using Repositories; 
+
+@inject RecipeRepository RecipeRepository
+
+@if (Data != null)
+{
+    <RecipeDetail Recipe="@Data"/>
+
+    <AuthorizeView>
+        <Authorized>
+            <ModifyRecipeCommand Recipe="@Data"/>
+        </Authorized>
+    </AuthorizeView>
+}
+
+@code {
+    [Parameter]
+    public string RecipeId { get; set; }
+
+    public RecipeViewModel Data { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Data = await RecipeRepository.GetAsync(RecipeId);
+
+        await base.OnParametersSetAsync();
+    }
+}

@@ -21,7 +21,7 @@ namespace recipebook.functions.test
             var api = root.Get<UserFunction>();
 
             // When
-            var result = await api.Run(root.GetRequest(), root.CoreLogger());
+            var result = await api.Run(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var userResult = result.AssertIsOkResultWithValue<User>();
@@ -41,7 +41,7 @@ namespace recipebook.functions.test
             var api = root.Get<UserFunction>();
 
             // When
-            var result = await api.Run(root.GetRequest(), root.CoreLogger());
+            var result = await api.Run(root.GetRequest(), root.CoreLogger(), root.AuthenticatedUser());
 
             // Then
             var userResult = result.AssertIsOkResultWithValue<User>();

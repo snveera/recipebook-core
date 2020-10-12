@@ -1,4 +1,5 @@
 ﻿
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,8 +21,9 @@ namespace recipebook.functions.Functions
 
         [FunctionName("api-health")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "health")] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequest req,
+            ILogger log,
+            ClaimsPrincipal user)
         {
             var result = _manager.Get(this.GetType().Assembly);
 
