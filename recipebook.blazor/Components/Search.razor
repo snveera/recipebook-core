@@ -7,8 +7,8 @@
 @inject AppState AppState 
 
 <div class="form-inline">
-    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" @bind="SearchText">
-    <select class="form-control mr-sm-3" id="categories" @bind="Category">
+    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search" @bind="SearchText" disabled="@IsWorking">
+    <select class="form-control mr-sm-3" id="categories" @bind="Category" disabled="@IsWorking">
         <option>Category</option>
         @foreach (var item in Categories)
         {
@@ -45,11 +45,11 @@
                 .OrderBy(r => r.Name)
                 .ToList();
 
-            StateHasChanged();
+            AppState.SearchError = null;
         }
         catch (Exception ex)
         {
-            SearchText = ex.ToString();
+            AppState.SearchError = "Error when searching";
         }
         finally
         {

@@ -1,13 +1,21 @@
-﻿using recipebook.blazor.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace recipebook.blazor.Models
 {
     public class AppState
     {
-        public List<Recipe> SearchResults { get; set; } = new List<Recipe>();
+        public event Action OnChange;
+
+        private List<Recipe> _searchResults = null;
+        public List<Recipe> SearchResults
+        {
+            get { return _searchResults; }
+            set { _searchResults = value; NotifyStateChanged(); }
+        }
+
+        public string SearchError { get; set; }
+
+        private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }

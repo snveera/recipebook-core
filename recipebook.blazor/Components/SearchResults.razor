@@ -1,0 +1,26 @@
+﻿@using Models;
+
+@implements IDisposable
+
+@inject AppState AppState
+
+<ul class="list-unstyled">
+    @foreach (var item in AppState.SearchResults ?? new List<Recipe>())
+    {
+        <li class="lead">@item.Name</li>
+    }
+</ul>
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.OnChange += StateHasChanged;
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+
+}
