@@ -73,7 +73,7 @@ namespace recipebook.blazor.Repositories
                 Servings = toMap?.Servings,
                 Source = toMap?.Source,
                 Ingredients = toMap?.IngredientsRaw,
-                Directions = toMap?.IngredientsRaw
+                Directions = toMap?.DirectionsRaw
             };
         }
     }
