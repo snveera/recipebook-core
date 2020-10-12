@@ -3,8 +3,7 @@
 @if (Recipe != null)
 {
     <h1 class="display-4">
-        @Recipe.Name<br />
-        <small class="text-muted">@Recipe.Category</small>
+        @Recipe.Name
     </h1>
 
     @if (Recipe?.Servings != null)
@@ -25,7 +24,7 @@
                 </dd>
 
                 <dt>Directions</dt>
-                <dd>
+                <dd class="col-md-6">
                     <ol>
                         @foreach (var item in Recipe.Directions ?? new List<string>())
                         {
