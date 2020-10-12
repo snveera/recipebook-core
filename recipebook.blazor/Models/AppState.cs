@@ -7,8 +7,8 @@ namespace recipebook.blazor.Models
     {
         public event Action OnChange;
 
-        private List<Recipe> _searchResults = null;
-        public List<Recipe> SearchResults
+        private List<RecipeViewModel> _searchResults = null;
+        public List<RecipeViewModel> SearchResults
         {
             get { return _searchResults; }
             set { _searchResults = value; NotifyStateChanged(); }

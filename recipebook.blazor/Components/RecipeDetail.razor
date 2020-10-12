@@ -1,0 +1,47 @@
+﻿@using Models;
+ 
+<h1 class="display-4">
+    @Recipe?.Name<br />
+    <small class="text-muted">@Recipe?.Category</small>
+</h1>
+
+@if (Recipe?.Servings != null)
+{
+    <p class="lead">Serves @Recipe?.Servings</p>
+}
+<div class="row">
+    <div class="col-md-12">
+        <dl>
+            <dt>Ingredients</dt>
+            <dd>
+                <ul style="list-style-type: none;">
+                    @foreach (var item in Recipe?.Ingredients ?? new List<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </dd>
+
+            <dt>Directions</dt>
+            <dd>
+                <ol>
+                    @foreach (var item in Recipe?.Directions ?? new List<string>())
+                    {
+                        <li>@item</li>
+                    }
+                </ol>
+            </dd>
+
+            @if (!string.IsNullOrWhiteSpace(Recipe?.Source))
+            {
+                <dt>Source</dt>
+                <dd>@Recipe?.Source</dd>
+            }
+        </dl>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RecipeViewModel Recipe { get; set; }
+}

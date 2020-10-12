@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using recipebook.blazor.Services;
 using recipebook.blazor.Models;
+using recipebook.blazor.Repositories;
 
 namespace recipebook.blazor
 {
@@ -62,6 +63,9 @@ namespace recipebook.blazor
             builder.Services.AddTransient<RecipeService>();
 
             builder.Services.AddSingleton<AppState>();
+
+            builder.Services.AddSingleton<CategoryRepository>();
+            builder.Services.AddSingleton<RecipeRepository>();
         }
     }
 }

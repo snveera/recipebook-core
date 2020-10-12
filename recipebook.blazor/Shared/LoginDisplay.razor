@@ -11,7 +11,7 @@
                 @context.User.Identity.Name
             </button>
             <div class="dropdown-menu">
-                <button class="dropdown-item btn btn-info" type="button">Claims</button>
+                <button class="dropdown-item btn btn-info" type="button" @onclick="NavigateToUserClaims">Claims</button>
                 <button class="dropdown-item btn btn-warning" type="button" @onclick="BeginLogout">Log out</button>
             </div>
         </div>
@@ -26,5 +26,10 @@
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
+    }
+
+    private void NavigateToUserClaims()
+    {
+        Navigation.NavigateTo("user/claims");
     }
 }

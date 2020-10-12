@@ -14,7 +14,7 @@ namespace recipebook.blazor.Services
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<List<Category>> GetCategories()
+        public async Task<List<Category>> Get()
         {
             var client = _httpClientFactory.CreateClient("RecipeApi");
             var response = await client.GetAsync("api/category");

@@ -1,9 +1,9 @@
 ﻿@using Models;
-@using Services; 
 @using System.Linq;
- 
-@inject CategoryService CategoryService
-@inject RecipeService RecipeService
+@using Repositories;
+
+@inject CategoryRepository CategoryRepository
+@inject RecipeRepository RecipeRepository
 @inject AppState AppState 
 
 <div class="form-inline">
@@ -19,14 +19,14 @@
 </div>
 
 @code {
-    public List<Category> Categories { get; set; } = new List<Category>();
+    public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
     public string SearchText { get; set; }
     public string Category { get; set; }
     public bool IsWorking { get; set; } = false;
 
     protected override async Task OnInitializedAsync()
     {
-        var data = await CategoryService.GetCategories();
+        var data = await CategoryRepository.GetAsync();
         Categories = data
             .OrderBy(c=>c.Name)
             .ToList();
@@ -39,7 +39,7 @@
         try
         {
             IsWorking = true;
-            var data = await RecipeService.Search(this.SearchText, this.Category);
+            var data = await RecipeRepository.SearchAsync(this.SearchText, this.Category);
 
             AppState.SearchResults = data
                 .OrderBy(r => r.Name)
@@ -47,7 +47,7 @@
 
             AppState.SearchError = null;
         }
-        catch (Exception ex)
+        catch
         {
             AppState.SearchError = "Error when searching";
         }

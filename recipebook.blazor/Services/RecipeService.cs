@@ -26,5 +26,15 @@ namespace recipebook.blazor.Services
             var data = await response.Content.ReadFromJsonAsync<List<Recipe>>();
             return data.Where(r=>r!=null).ToList();
         }
+
+        public async Task<Recipe> Get(string id)
+        {
+            var client = _httpClientFactory.CreateClient("RecipeApi");
+            var response = await client.GetAsync($"api/recipe/{id}");
+            response.EnsureSuccessStatusCode();
+
+            var data = await response.Content.ReadFromJsonAsync<Recipe>();
+            return data;
+        }
     }
 }
