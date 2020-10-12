@@ -1,6 +1,8 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-
+.body {
+    padding-top: 60px;
+}
 
 #blazor-error-ui {
     background: lightyellow;
