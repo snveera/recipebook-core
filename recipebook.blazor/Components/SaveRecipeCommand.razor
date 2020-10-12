@@ -1,0 +1,28 @@
+﻿@using Models; 
+@using Repositories;
+ 
+@inject NavigationManager Navigation
+@inject RecipeRepository RecipeRepository
+@inject AppState AppState
+
+<button type="button" class="btn btn-success" @onclick="@(async e=> await SaveChanges())">Save</button>
+<button type="button" class="btn btn-danger" @onclick="CancelChanges">Cancel</button>
+
+@code {
+    [Parameter]
+    public RecipeViewModel Recipe { get; set; }
+    [Parameter]
+    public string ReturnUri { get; set; }
+
+    public async Task SaveChanges()
+    {
+        await RecipeRepository.SaveAsync(Recipe);
+        AppState.Clear();
+
+        Navigation.NavigateTo(ReturnUri);
+    }
+    public void CancelChanges()
+    {
+        Navigation.NavigateTo(ReturnUri);
+    }
+}

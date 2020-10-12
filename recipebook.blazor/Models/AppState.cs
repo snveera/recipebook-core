@@ -16,6 +16,11 @@ namespace recipebook.blazor.Models
 
         public string SearchError { get; set; }
 
+        public void Clear()
+        {
+            SearchResults = null;
+        }
+
         private void NotifyStateChanged() => OnChange?.Invoke();
     }
 }

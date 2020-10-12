@@ -6,6 +6,12 @@
 
 <RecipeDetail Recipe="@Data"/>
 
+<AuthorizeView>
+    <Authorized>
+        <ModifyRecipeCommand Recipe="@Data"/>
+    </Authorized>
+</AuthorizeView>
+
 @code {
     [Parameter]
     public string RecipeId { get; set; }

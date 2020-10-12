@@ -5,7 +5,11 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <div class="nav navbar-nav mr-auto">
                 <Search />
-                &nbsp; <AddRecipe/>
+                <AuthorizeView>
+                    <Authorized>
+                        &nbsp; <AddRecipeCommand />
+                    </Authorized>
+                </AuthorizeView>
             </div>
             <span class="navbar-text">
                 <LoginDisplay/>

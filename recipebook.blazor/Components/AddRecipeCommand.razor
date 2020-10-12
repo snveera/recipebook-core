@@ -1,0 +1,11 @@
+﻿@inject NavigationManager Navigation
+
+<button class="btn btn-outline-secondary" @onclick="ShowEditor">Add</button>
+
+@code {
+
+    public void ShowEditor()
+    {
+        Navigation.NavigateTo($"/recipes/create");
+    }
+}

@@ -35,6 +35,11 @@ namespace recipebook.blazor.Repositories
             return result;
         }
 
+        public async Task SaveAsync(RecipeViewModel toSave)
+        {
+
+        }
+
         private RecipeViewModel Map(Recipe toMap)
         {
             return new RecipeViewModel 
@@ -44,8 +49,8 @@ namespace recipebook.blazor.Repositories
                 Category = toMap?.Category,
                 Servings = toMap?.Servings,
                 Source = toMap?.Source,
-                Ingredients = toMap?.Ingredients.ToLineList(),
-                Directions = toMap?.Directions.ToLineList()
+                IngredientsRaw = toMap?.Ingredients,
+                DirectionsRaw = toMap?.Directions
             };
         }
     }

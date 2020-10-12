@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using recipebook.blazor.Extensions;
+using System.Collections.Generic;
 
 namespace recipebook.blazor.Models
 {
@@ -11,9 +12,11 @@ namespace recipebook.blazor.Models
 
         public int? Servings { get; set; }
 
-        public List<string> Ingredients { get; set; }
+        public string IngredientsRaw { get; set; }
+        public List<string> Ingredients => IngredientsRaw.ToLineList();
 
-        public List<string> Directions { get; set; }
+        public string DirectionsRaw { get; set; }
+        public List<string> Directions => IngredientsRaw.ToLineList();
 
         public string Source { get; set; }
 

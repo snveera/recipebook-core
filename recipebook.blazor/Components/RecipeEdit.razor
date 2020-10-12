@@ -1,0 +1,47 @@
+﻿@using Models;
+
+@if (Recipe != null)
+{
+<div class="form">
+    <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputName" placeholder="Name" @bind="Recipe.Name">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputServings" class="col-sm-2 col-form-label">Servings</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="inputServings" placeholder="Servings" @bind="Recipe.Servings">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputIngredients" class="col-sm-2 col-form-label">Ingredients</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="inputIngredients" rows="10" placeholder="Ingredients" @bind="Recipe.IngredientsRaw" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputDirections" class="col-sm-2 col-form-label">Directions</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="inputDirections" rows="10" placeholder="Directions" @bind="Recipe.DirectionsRaw" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="inputSource" class="col-sm-2 col-form-label">Source</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputSource" placeholder="Source" @bind="Recipe.Source">
+        </div>
+    </div>
+</div>
+
+}
+
+@code {
+    [Parameter]
+    public RecipeViewModel Recipe { get; set; }
+}

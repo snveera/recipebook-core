@@ -1,0 +1,14 @@
+﻿@using Models; 
+@inject NavigationManager Navigation
+
+<button type="button" class="btn btn-outline-primary" @onclick="ShowEditor">Modify</button>
+
+@code {
+    [Parameter]
+    public RecipeViewModel Recipe { get; set; }
+
+    public void ShowEditor()
+    {
+        Navigation.NavigateTo($"/recipes/{Recipe.Id}/edit");
+    }
+}
