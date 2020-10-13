@@ -1,0 +1,22 @@
+﻿
+@if (IsSearchVisible)
+{
+    <a href="" class="navbar-brand"><span class="oi oi-circle-x" aria-hidden="true" @onclick="HideSearch"></span></a>
+    <Search />
+}
+else
+{
+    <a href="" class="navbar-brand"><span class="oi oi-magnifying-glass" aria-hidden="true" @onclick="ShowSearch"></span></a>
+}
+
+@code {
+    public bool IsSearchVisible { get; set; } = false;
+    public void ShowSearch()
+    {
+        IsSearchVisible = true;
+    }
+    public void HideSearch()
+    {
+        IsSearchVisible = false;
+    }
+}
