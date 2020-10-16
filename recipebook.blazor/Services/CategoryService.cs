@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace recipebook.blazor.Services
 {
-    public class CategoryService
+    public interface ICategoryService
+    {
+        Task<List<Category>> Get();
+    }
+    public class CategoryService: ICategoryService
     {
         private readonly IHttpClientFactory _httpClientFactory;
 

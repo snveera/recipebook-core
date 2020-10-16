@@ -8,7 +8,16 @@ using System.Threading.Tasks;
 
 namespace recipebook.blazor.Services
 {
-    public class RecipeService
+    public interface IRecipeService
+    {
+        Task Create(Recipe toSave);
+        Task Delete(string id);
+        Task<Recipe> Get(string id);
+        Task<List<Recipe>> Search(string searchText, string category);
+        Task Update(Recipe toSave);
+    }
+
+    public class RecipeService : IRecipeService
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -24,7 +33,7 @@ namespace recipebook.blazor.Services
             response.EnsureSuccessStatusCode();
 
             var data = await response.Content.ReadFromJsonAsync<List<Recipe>>();
-            return data.Where(r=>r!=null).ToList();
+            return data.Where(r => r != null).ToList();
         }
 
         public async Task<Recipe> Get(string id)

@@ -1,7 +1,5 @@
-﻿using recipebook.blazor.Extensions;
-using recipebook.blazor.Models;
+﻿using recipebook.blazor.Models;
 using recipebook.blazor.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +8,9 @@ namespace recipebook.blazor.Repositories
 {
     public class RecipeRepository
     {
-        private readonly RecipeService _recipeService;
+        private readonly IRecipeService _recipeService;
 
-        public RecipeRepository(RecipeService recipeService)
+        public RecipeRepository(IRecipeService recipeService)
         {
             _recipeService = recipeService;
         }

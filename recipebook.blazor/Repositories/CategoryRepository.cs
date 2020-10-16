@@ -10,9 +10,9 @@ namespace recipebook.blazor.Repositories
 {
     public class CategoryRepository
     {
-        private readonly CategoryService _categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryRepository(CategoryService categoryService)
+        public CategoryRepository(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
