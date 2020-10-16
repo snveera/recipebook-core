@@ -26,14 +26,7 @@ jobs:
       with:
         html_path: ${{ env.PUBLISH_DIR }}/index.html
         base_href: /
-        
-    - name: Set Custom Domain Name
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ env.PUBLISH_DIR }}
-        cname: recipes.rolstadfamily.com
-      
+
     - name: Publish to Github Pages
       if: success()
       uses: crazy-max/ghaction-github-pages@v1.5.1
@@ -42,3 +35,10 @@ jobs:
         build_dir: ${{ env.PUBLISH_DIR }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Set Custom Domain Name
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ env.PUBLISH_DIR }}
+        cname: recipes.rolstadfamily.com
