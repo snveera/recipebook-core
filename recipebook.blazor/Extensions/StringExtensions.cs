@@ -1,4 +1,5 @@
-﻿using System;
+﻿using recipebook.blazor.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,13 +13,28 @@ namespace recipebook.blazor.Extensions
                 return new List<List<string>>();
 
             var delimiterResolved = delimiter ?? Environment.NewLine;
-            var splitValues = value
+
+            var lines = value
                 .Split(new[] { delimiterResolved }, StringSplitOptions.None)
                 .Select(l => l?.Trim())
                 .Where(l=>!string.IsNullOrWhiteSpace(l))
                 .ToList();
 
-            return new List<List<string>> { splitValues };
+            
+            var current = new List<string>();
+            var result = new List<List<string>> { current };
+            foreach (var line in lines)
+            {
+                if(line.StartsWith(SpecialCharacters.TitleIndicator))
+                {
+                    current = new List<string>();
+                    result.Add(current);
+                }
+
+                current.Add(line);
+            }
+
+            return result;
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿@using Models; 
+@if (Value.StartsWith(SpecialCharacters.TitleIndicator))
+{
+    <span class="font-weight-bold">@Value.Replace(SpecialCharacters.TitleIndicator, "")</span>
+}
+else
+{
+    <li><span class="font-weight-normal">@Value</span></li>
+}
+
+@code {
+    [Parameter]
+    public string Value { get; set; }
+}
