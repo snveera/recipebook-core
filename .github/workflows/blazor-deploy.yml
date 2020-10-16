@@ -25,7 +25,7 @@ jobs:
       uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
       with:
         html_path: ${{ env.PUBLISH_DIR }}/index.html
-        base_href: /recipebook-core/
+        base_href: /
 
     - name: Publish to Github Pages
       if: success()
