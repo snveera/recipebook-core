@@ -13,10 +13,10 @@ namespace recipebook.blazor.Models
         public int? Servings { get; set; }
 
         public string IngredientsRaw { get; set; }
-        public List<string> Ingredients => IngredientsRaw.ToLineList();
+        public List<List<string>> Ingredients => IngredientsRaw.ToLineList();
 
         public string DirectionsRaw { get; set; }
-        public List<string> Directions => DirectionsRaw.ToLineList();
+        public List<List<string>> Directions => DirectionsRaw.ToLineList();
 
         public string Source { get; set; }
 

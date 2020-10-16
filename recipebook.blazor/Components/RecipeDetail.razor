@@ -15,22 +15,31 @@
             <dl>
                 <dt>Ingredients</dt>
                 <dd>
-                    <ul style="list-style-type: none;">
-                        @foreach (var item in Recipe.Ingredients ?? new List<string>())
-                        {
-                            <li>@item</li>
-                        }
-                    </ul>
+                    @foreach (var set in Recipe.Ingredients ?? new List<List<string>>())
+                    {
+                        <ul style="list-style-type: none;">
+                            @foreach (var item in set)
+                            {
+                            <li><ValueDisplay Value="@item" /></li>
+                            }
+                        </ul>
+                        <br/>
+                    }
                 </dd>
 
                 <dt>Directions</dt>
                 <dd class="col-md-6">
-                    <ol>
-                        @foreach (var item in Recipe.Directions ?? new List<string>())
-                        {
-                            <li>@item</li>
-                        }
-                    </ol>
+                    @foreach (var set in Recipe.Directions ?? new List<List<string>>())
+                    {
+                        <ol>
+                            @foreach (var item in set)
+                            {
+                                <li><ValueDisplay Value="@item"/></li>
+                            }
+                        </ol>
+                        <br />
+                    }
+
                 </dd>
 
                 @if (!string.IsNullOrWhiteSpace(Recipe.Source))
